@@ -12,7 +12,11 @@
   <meta property="og:description" content="Порожняк — потерянные деньги. Размести вагон в @VagonMarketBot — найди попутный груз и заработай. Ставку назначаешь ты.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://проф-логист.рф/vagonmarket.html">
+  <meta property="og:image" content="https://проф-логист.рф/og-image.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="ТД Кайрос Импорт | VagonMarket">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -882,6 +886,107 @@
   </style>
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='8' y='30' width='56' height='32' rx='4' fill='%23C9A96E'/><rect x='38' y='12' width='30' height='20' rx='3' fill='%23C9A96E'/><circle cx='22' cy='68' r='8' fill='%23C9A96E'/><circle cx='60' cy='68' r='8' fill='%23C9A96E'/></svg>">
+
+  <!-- JSON-LD Structured Data -->
+  <!-- WebApplication Schema for VagonMarketBot -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "@id": "https://проф-логист.рф/vagonmarket.html#app",
+    "name": "VagonMarketBot",
+    "description": "Telegram-бот для поиска попутных грузов владельцами порожних вагонов. Размести вагон, найди груз, заработай на обратном рейсе.",
+    "url": "https://t.me/VagonMarketBot",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "RUB"
+    }
+  }
+  </script>
+
+  <!-- FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": "https://проф-логист.рф/vagonmarket.html#faq",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Что такое попутный груз и чем это выгодно мне как владельцу вагона?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Твой вагон привёз груз и возвращается порожняком — ты всё равно платишь за обратный пробег. Попутный груз — это возможность загрузить вагон на обратном пути. Вместо убытка — доход. Ставку назначаешь ты сам."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Сколько я могу заработать и какую ставку ставить?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ставку определяешь ты. Главное, чтобы она покрывала порожний пробег и приносила прибыль. Грузоотправители ищут дешёвую отправку — твоя цена будет для них привлекательной, а для тебя — чистой прибылью вместо убытка."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Как быстро найдётся груз на мой маршрут?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Чем привлекательнее твоя ставка — тем быстрее. В базе 12 000+ вагонов и сотни грузоотправителей. Как только ты размещаешь объявление, бот сразу показывает его заинтересованным сторонам."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Насколько это законно и как оформляется?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Все перевозки оформляются официальным договором и железнодорожной накладной. Ты работаешь напрямую с грузоотправителем. Прозрачные условия, полная юридическая защита."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- HowTo Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "@id": "https://проф-логист.рф/vagonmarket.html#howto",
+    "name": "Как заработать на порожнем вагоне через VagonMarketBot",
+    "description": "Четыре простых шага, чтобы превратить порожний пробег вагона в доход: открой бота, укажи маршрут, выбери тип вагона и размести объявление.",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Открываешь бота",
+        "text": "Запусти @VagonMarketBot в Telegram — всё в одном чате.",
+        "url": "https://t.me/VagonMarketBot"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Указываешь маршрут",
+        "text": "Откуда и куда идёт твой вагон — бот подскажет направления."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Выбираешь тип вагона",
+        "text": "Полувагон, крытый, платформа — любой подвижной состав."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 4,
+        "name": "Размещаешь объявление",
+        "text": "Грузоотправители увидят твой вагон и свяжутся с тобой."
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -906,10 +1011,8 @@
     <div class="vagon-hero__inner">
       <div class="vagon-hero__content">
         <h1 class="vagon-hero__title">
-          Вагон идёт порожняком?
-        </h1>
-        <h1 class="vagon-hero__title vagon-hero__title--gold">
-          Заработай на обратном рейсе
+          Вагон идёт порожняком? <br>
+          <span class="vagon-hero__title--gold">Заработай на обратном рейсе</span>
         </h1>
 
         <p class="vagon-hero__desc">
@@ -945,7 +1048,7 @@
           <circle cx="180" cy="180" r="110"/>
           <circle cx="180" cy="180" r="50"/>
         </div>
-        <svg viewBox="0 0 120 120" width="200" height="200" fill="none">
+        <svg viewBox="0 0 120 120" width="200" height="200" fill="none" role="img" aria-label="Поезд с вагонами и золотой колёсной парой">
           <rect x="0" y="30" width="80" height="40" rx="4" stroke="#c9a84c" stroke-width="2.5" fill="none" opacity="0.4"/>
           <rect x="18" y="12" width="40" height="20" rx="4" stroke="#c9a84c" stroke-width="2" fill="none" opacity="0.4"/>
           <circle cx="14" cy="76" r="8" stroke="#c9a84c" stroke-width="2.5" fill="none" opacity="0.4"/>
@@ -1019,7 +1122,7 @@
           <h3>Назначаешь ставку сам</h3>
           <p>Главное — чтобы цена покрывала порожний пробег и приносила прибыль. Грузоотправители ищут дешёвую отправку — ты даёшь её, загружая вагон, который всё равно шёл бы пустым.</p>
           <div class="vagon-benefits__icon-bg">
-            <svg viewBox="0 0 64 64" fill="none" width="44" height="44">
+            <svg viewBox="0 0 64 64" fill="none" width="44" height="44" role="img" aria-label="Ты назначаешь ставку">
               <rect x="4" y="22" width="56" height="28" rx="4" stroke="#c9a84c" stroke-width="2.5" fill="none"/>
               <circle cx="32" cy="36" r="9" stroke="#c9a84c" stroke-width="2" fill="none"/>
               <text x="32" y="40" text-anchor="middle" font-size="12" font-weight="bold" fill="#c9a84c" font-family="system-ui">₽</text>
@@ -1032,7 +1135,7 @@
           <h3>убытка — доход</h3>
           <p>Вагон привёз груз, выгрузился и возвращается порожняком? Ты всё равно платишь за обратный пробег. Размести вагон в боте — найди попутный груз и преврати порожняк в прибыль.</p>
           <div class="vagon-benefits__icon-bg">
-            <svg viewBox="0 0 64 64" fill="none" width="44" height="44">
+            <svg viewBox="0 0 64 64" fill="none" width="44" height="44" role="img" aria-label="Вместо убытка доход">
               <rect x="4" y="22" width="56" height="28" rx="4" stroke="#c9a84c" stroke-width="2.5" fill="none"/>
               <circle cx="32" cy="36" r="9" stroke="#c9a84c" stroke-width="2" fill="none"/>
               <text x="32" y="40" text-anchor="middle" font-size="12" font-weight="bold" fill="#c9a84c" font-family="system-ui">↑</text>
@@ -1057,7 +1160,7 @@
         <div class="vagon-types__item reveal">
           <div class="vagon-types__icon">
             <!-- icon-wagon-covered -->
-            <svg viewBox="0 0 64 64" fill="none" width="48" height="48">
+            <svg viewBox="0 0 64 64" fill="none" width="48" height="48" role="img" aria-label="Крытый вагон">
               <rect x="6" y="18" width="40" height="22" rx="3" stroke="#c9a84c" stroke-width="2" fill="none"/>
               <path d="M6 18l12-6h16l12 6" stroke="#c9a84c" stroke-width="2" fill="none" stroke-linejoin="round"/>
               <rect x="10" y="22" width="14" height="12" rx="1" fill="#c9a84c" opacity="0.15"/>
@@ -1076,7 +1179,7 @@
         <div class="vagon-types__item reveal">
           <div class="vagon-types__icon">
             <!-- icon-wagon-gondola -->
-            <svg viewBox="0 0 64 64" fill="none" width="48" height="48">
+            <svg viewBox="0 0 64 64" fill="none" width="48" height="48" role="img" aria-label="Полувагон">
               <rect x="6" y="14" width="40" height="24" rx="3" stroke="#c9a84c" stroke-width="2" fill="none"/>
               <line x1="6" y1="14" x2="46" y2="14" stroke="#c9a84c" stroke-width="1.5"/>
               <rect x="10" y="22" width="12" height="10" rx="1" fill="#c9a84c" opacity="0.15"/>
@@ -1093,7 +1196,7 @@
         <div class="vagon-types__item reveal">
           <div class="vagon-types__icon">
             <!-- icon-wagon-platform -->
-            <svg viewBox="0 0 64 64" fill="none" width="48" height="48">
+            <svg viewBox="0 0 64 64" fill="none" width="48" height="48" role="img" aria-label="Вагон-платформа">
               <rect x="6" y="20" width="40" height="8" rx="2" stroke="#c9a84c" stroke-width="2" fill="none"/>
               <rect x="20" y="10" width="14" height="10" rx="1" stroke="#c9a84c" stroke-width="2" fill="none"/>
               <line x1="27" y1="10" x2="27" y2="20" stroke="#c9a84c" stroke-width="1"/>
@@ -1110,7 +1213,7 @@
         <div class="vagon-types__item reveal">
           <div class="vagon-types__icon">
             <!-- icon-wagon-tank -->
-            <svg viewBox="0 0 64 64" fill="none" width="48" height="48">
+            <svg viewBox="0 0 64 64" fill="none" width="48" height="48" role="img" aria-label="Вагон-цистерна">
               <rect x="8" y="18" width="34" height="14" rx="7" stroke="#c9a84c" stroke-width="2" fill="none"/>
               <rect x="12" y="22" width="26" height="6" rx="3" fill="#c9a84c" opacity="0.15"/>
               <circle cx="16" cy="44" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
@@ -1127,7 +1230,7 @@
         <div class="vagon-types__item reveal">
           <div class="vagon-types__icon">
             <!-- icon-wagon-refrigerator -->
-            <svg viewBox="0 0 64 64" fill="none" width="48" height="48">
+            <svg viewBox="0 0 64 64" fill="none" width="48" height="48" role="img" aria-label="Вагон-рефрижератор">
               <rect x="6" y="16" width="36" height="22" rx="3" stroke="#c9a84c" stroke-width="2" fill="none"/>
               <rect x="6" y="16" width="36" height="12" rx="3" stroke="#c9a84c" stroke-width="1" fill="none"/>
               <line x1="10" y1="20" x2="12" y2="20" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
@@ -1145,7 +1248,7 @@
         <div class="vagon-types__item reveal">
           <div class="vagon-types__icon">
             <!-- icon-wagon-hopper -->
-            <svg viewBox="0 0 64 64" fill="none" width="48" height="48">
+            <svg viewBox="0 0 64 64" fill="none" width="48" height="48" role="img" aria-label="Вагон-хоппер">
               <path d="M8 14h30l6 10v10H8V14z" stroke="#c9a84c" stroke-width="2" fill="none" stroke-linejoin="round"/>
               <path d="M18 34l-4 6h20l-4-6" stroke="#c9a84c" stroke-width="2" fill="none" stroke-linejoin="round"/>
               <circle cx="14" cy="48" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
@@ -1162,7 +1265,7 @@
         <div class="vagon-types__item reveal">
           <div class="vagon-types__icon">
             <!-- icon-wagon-fitting -->
-            <svg viewBox="0 0 64 64" fill="none" width="48" height="48">
+            <svg viewBox="0 0 64 64" fill="none" width="48" height="48" role="img" aria-label="Фитинговая платформа для контейнеров">
               <rect x="6" y="20" width="40" height="10" rx="2" stroke="#c9a84c" stroke-width="2" fill="none"/>
               <rect x="18" y="10" width="8" height="10" rx="2" stroke="#c9a84c" stroke-width="2" fill="none"/>
               <rect x="30" y="10" width="8" height="10" rx="2" stroke="#c9a84c" stroke-width="2" fill="none"/>
@@ -1178,7 +1281,7 @@
         <div class="vagon-types__item reveal">
           <div class="vagon-types__icon">
             <!-- icon-wagon-other -->
-            <svg viewBox="0 0 64 64" fill="none" width="48" height="48">
+            <svg viewBox="0 0 64 64" fill="none" width="48" height="48" role="img" aria-label="Специализированный вагон">
               <rect x="6" y="18" width="38" height="18" rx="3" stroke="#c9a84c" stroke-width="2" fill="none"/>
               <rect x="10" y="22" width="8" height="10" rx="1" fill="#c9a84c" opacity="0.15"/>
               <rect x="22" y="22" width="8" height="10" rx="1" fill="#c9a84c" opacity="0.15"/>
@@ -1201,12 +1304,12 @@
       <h2>Начни прямо сейчас</h2>
       <p>Открывай @VagonMarketBot, размести вагон — и пусть грузоотправители сами тебя находят</p>
       <a href="https://t.me/VagonMarketBot" target="_blank" rel="noopener" class="btn-gold">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px"><rect x="3" y="7" width="14" height="11" rx="2"/><rect x="12" y="3" width="9" height="6" rx="1.5"/><circle cx="8" cy="20" r="2.5"/><circle cx="17" cy="20" r="2.5"/></svg> Разместить вагон в боте →
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px" role="img" aria-label="Вагон"><rect x="3" y="7" width="14" height="11" rx="2"/><rect x="12" y="3" width="9" height="6" rx="1.5"/><circle cx="8" cy="20" r="2.5"/><circle cx="17" cy="20" r="2.5"/></svg> Разместить вагон в боте →
       </a>
       <div class="vagon-cta__badges">
-        <span class="vagon-cta__badge"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" style="vertical-align:middle;margin-right:3px"><path d="M8 1l7 7-7 7-7-7z"/></svg> Ставку назначаешь ты</span>
-        <span class="vagon-cta__badge"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" style="vertical-align:middle;margin-right:3px"><path d="M8 1l7 7-7 7-7-7z"/></svg> Без комиссии</span>
-        <span class="vagon-cta__badge"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" style="vertical-align:middle;margin-right:3px"><path d="M8 1l7 7-7 7-7-7z"/></svg> 24/7 поддержка</span>
+        <span class="vagon-cta__badge"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" style="vertical-align:middle;margin-right:3px" aria-hidden="true"><path d="M8 1l7 7-7 7-7-7z"/></svg> Ставку назначаешь ты</span>
+        <span class="vagon-cta__badge"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" style="vertical-align:middle;margin-right:3px" aria-hidden="true"><path d="M8 1l7 7-7 7-7-7z"/></svg> Без комиссии</span>
+        <span class="vagon-cta__badge"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" style="vertical-align:middle;margin-right:3px" aria-hidden="true"><path d="M8 1l7 7-7 7-7-7z"/></svg> 24/7 поддержка</span>
       </div>
     </div>
   </section>
@@ -1222,7 +1325,7 @@
       <div class="vagon-target__grid">
         <div class="vagon-target__card reveal">
           <!-- icon-owner -->
-          <svg viewBox="0 0 64 64" fill="none">
+          <svg viewBox="0 0 64 64" fill="none" role="img" aria-label="Владелец вагона">
             <circle cx="32" cy="18" r="10" stroke="#c9a84c" stroke-width="2.5" fill="none"/>
             <path d="M12 58c0-12 9-20 20-20s20 8 20 20" stroke="#c9a84c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
             <rect x="40" y="8" width="12" height="8" rx="2" stroke="#c9a84c" stroke-width="1.5" fill="none"/>
@@ -1234,7 +1337,7 @@
 
         <div class="vagon-target__card reveal">
           <!-- icon-shipper -->
-          <svg viewBox="0 0 64 64" fill="none">
+          <svg viewBox="0 0 64 64" fill="none" role="img" aria-label="Грузоотправитель">
             <rect x="6" y="18" width="30" height="16" rx="3" stroke="#c9a84c" stroke-width="2.5" fill="none"/>
             <rect x="30" y="10" width="14" height="10" rx="3" stroke="#c9a84c" stroke-width="2" fill="none"/>
             <circle cx="12" cy="42" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
@@ -1249,7 +1352,7 @@
 
         <div class="vagon-target__card reveal">
           <!-- icon-carrier -->
-          <svg viewBox="0 0 64 64" fill="none">
+          <svg viewBox="0 0 64 64" fill="none" role="img" aria-label="Перевозчик">
             <path d="M8 32c0-10 4-16 12-16s12 6 12 16-4 16-12 16-12-6-12-16z" stroke="#c9a84c" stroke-width="2.5" fill="none"/>
             <path d="M32 32c0-10 4-16 12-16s12 6 12 16-4 16-12 16-12-6-12-16z" stroke="#c9a84c" stroke-width="2" fill="none" opacity="0.6"/>
             <path d="M28 26l-4-4-4 4" stroke="#c9a84c" stroke-width="2" fill="none" stroke-linecap="round"/>
@@ -1339,7 +1442,7 @@
         </div>
         <div class="vagon-footer__col">
           <h4>Контакты</h4>
-          <a href="https://t.me/VagonMarketBot" target="_blank" rel="noopener" class="vagon-footer__bot"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg> @VagonMarketBot</a>
+          <a href="https://t.me/VagonMarketBot" target="_blank" rel="noopener" class="vagon-footer__bot"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px" role="img" aria-label="Telegram"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg> @VagonMarketBot</a>
 
           <a href="https://проф-логист.рф">Сайт: проф-логист.рф</a>
         </div>

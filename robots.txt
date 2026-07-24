@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Sitemap: https://farmagro-logistics.ru/sitemap.xml
+Sitemap: https://проф-логист.рф/sitemap.xml
 
-# Комментарий: ФармАгро Логистика — доставка грузов из Китая в Россию
+# ТД Кайрос Импорт — доставка грузов из Китая в Россию
