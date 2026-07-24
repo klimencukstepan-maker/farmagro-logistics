@@ -1,0 +1,373 @@
+/* ============================================
+   ФармАгро Логистика — Main Script
+   ============================================ */
+
+'use strict';
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ========== SCROLL ANIMATIONS (Intersection Observer) ==========
+  const revealElements = document.querySelectorAll('.reveal');
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target); // animate once
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+
+  // ========== HEADER SCROLL EFFECT ==========
+  const header = document.getElementById('header');
+
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // ========== MOBILE MENU ==========
+  const hamburger = document.getElementById('hamburger');
+  const nav = document.getElementById('nav');
+  const navLinks = document.querySelectorAll('.nav__link');
+
+  function toggleMenu() {
+    const isOpen = nav.classList.toggle('open');
+    hamburger.classList.toggle('active');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+
+  function closeMenu() {
+    nav.classList.remove('open');
+    hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', toggleMenu);
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (nav.classList.contains('open') &&
+        !nav.contains(e.target) &&
+        !hamburger.contains(e.target)) {
+      closeMenu();
+    }
+  });
+
+  // Close on escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav.classList.contains('open')) {
+      closeMenu();
+    }
+  });
+
+  // ========== ANIMATED COUNTERS ==========
+  const statNumbers = document.querySelectorAll('.hero__stat-num[data-count]');
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-count'), 10);
+        animateCounter(el, target);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  statNumbers.forEach(el => counterObserver.observe(el));
+
+  function animateCounter(element, target) {
+    const duration = 2000; // ms
+    const startTime = performance.now();
+
+    function update(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(eased * target);
+
+      // If target > 100, show with + sign after; else show exact
+      if (target >= 100) {
+        element.textContent = target >= 500 ? current : current;
+      } else {
+        element.textContent = current;
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        element.textContent = target >= 500 ? target + '+' : target + (target >= 100 ? '%' : '');
+      }
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  // ========== PRICE CALCULATOR ==========
+  const calcForm = document.getElementById('calcForm');
+  const calcResult = document.getElementById('calcResult');
+  const calcPrice = document.getElementById('calcPrice');
+
+  // Base rates: (weightRate $/kg, volumeRate $/m³)
+  const rates = {
+    general:     { weight: 3.2,  volume: 180 },
+    equipment:   { weight: 4.0,  volume: 220 },
+    chemicals:   { weight: 4.5,  volume: 250 },
+    food:        { weight: 3.8,  volume: 200 },
+    textile:     { weight: 2.8,  volume: 150 },
+    other:       { weight: 3.5,  volume: 190 }
+  };
+
+  // City multipliers
+  const cityMult = {
+    guangzhou: 1.0,
+    shenzhen:  1.05,
+    shanghai:  1.1,
+    yiwu:      0.95,
+    beijing:   1.15,
+    other:     1.1
+  };
+
+  const destMult = {
+    moscow:      1.0,
+    spb:         1.05,
+    novosibirsk: 0.9,
+    ekb:         0.85,
+    kazan:       0.92,
+    vladivostok: 0.75,
+    other:       0.95
+  };
+
+  calcForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const cargoType = document.getElementById('cargoType').value;
+    const weight = parseFloat(document.getElementById('weight').value) || 0;
+    const volume = parseFloat(document.getElementById('volume').value) || 0;
+    const fromCity = document.getElementById('fromCity').value;
+    const toCity = document.getElementById('toCity').value;
+
+    if (weight <= 0 || volume <= 0) {
+      showToast('Пожалуйста, укажите вес и объём груза');
+      return;
+    }
+
+    const r = rates[cargoType] || rates.general;
+    const costByWeight = weight * r.weight;
+    const costByVolume = volume * r.volume;
+    const baseCost = Math.max(costByWeight, costByVolume);
+
+    const fromMult = cityMult[fromCity] || 1.0;
+    const toMult = destMult[toCity] || 1.0;
+    const total = Math.round(baseCost * fromMult * toMult);
+
+    // Animate result
+    calcPrice.textContent = '$0';
+    calcResult.style.display = 'block';
+
+    animatePrice(0, total, 1000);
+
+    // Scroll to result
+    setTimeout(() => {
+      calcResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
+  });
+
+  function animatePrice(from, to, duration) {
+    const startTime = performance.now();
+
+    function update(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(from + (to - from) * eased);
+      calcPrice.textContent = '$' + current.toLocaleString();
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      }
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  // ========== FORM SUBMISSIONS (Telegram stub) ==========
+  const forms = document.querySelectorAll('form[id$="Form"]');
+
+  forms.forEach(form => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Отправка...';
+
+      // Collect form data
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => { data[key] = value; });
+
+      // Build message for Telegram
+      const formName = form.id === 'heroForm' ? 'Быстрая заявка (Hero)' :
+                       form.id === 'contactForm' ? 'Форма обратной связи' : 'Форма';
+      const message = [
+        `📩 <b>${formName}</b>`,
+        `👤 Имя: ${data.name || '—'}`,
+        `📞 Телефон: ${data.phone || '—'}`,
+        `📧 Email: ${data.email || '—'}`,
+        `💬 Сообщение: ${data.message || '—'}`
+      ].join('\n');
+
+      // Simulate sending to Telegram (placeholder — replace with real API call)
+      try {
+        // In production, uncomment and use:
+        // const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN';
+        // const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID';
+        // const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message, parse_mode: 'HTML' })
+        // });
+
+        // Simulate network delay
+        await new Promise(resolve => setTimeout(resolve, 1200));
+
+        showToast('✅ Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
+        form.reset();
+
+        // Reset calculator result if it's the hero form
+        if (form.id === 'heroForm') {
+          calcResult.style.display = 'none';
+        }
+      } catch (err) {
+        showToast('❌ Ошибка отправки. Попробуйте позже или напишите в Telegram @nvitalikv');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+  });
+
+  // ========== PHONE INPUT FORMATTING ==========
+  const phoneInputs = document.querySelectorAll('input[type="tel"]');
+
+  phoneInputs.forEach(input => {
+    input.addEventListener('input', (e) => {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length === 0) {
+        e.target.value = '';
+        return;
+      }
+
+      // Russian format: +7 (___) ___-__-__
+      if (value.startsWith('7') || value.startsWith('8')) {
+        if (value.startsWith('8')) value = '7' + value.slice(1);
+      } else {
+        value = '7' + value;
+      }
+
+      let formatted = '+7';
+      if (value.length > 1) {
+        formatted += ' (' + value.slice(1, 4);
+      }
+      if (value.length >= 5) {
+        formatted += ') ' + value.slice(4, 7);
+      }
+      if (value.length >= 8) {
+        formatted += '-' + value.slice(7, 9);
+      }
+      if (value.length >= 10) {
+        formatted += '-' + value.slice(9, 11);
+      }
+
+      e.target.value = formatted;
+    });
+  });
+
+  // ========== SMOOTH SCROLL FOR ANCHOR LINKS (fallback) ==========
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      const targetId = anchor.getAttribute('href');
+      if (targetId === '#') return;
+      const target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        const headerOffset = parseInt(getComputedStyle(document.documentElement).scrollPaddingTop) || 70;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // ========== TOAST SYSTEM ==========
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+
+    toast.textContent = message;
+    toast.classList.add('show');
+
+    // Clear any existing timeout
+    if (window._toastTimeout) clearTimeout(window._toastTimeout);
+
+    window._toastTimeout = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 4000);
+  }
+
+  // Expose showToast globally if needed by inline scripts
+  window.showToast = showToast;
+
+  // ========== FAQ ACCORDION ==========
+  const faqItems = document.querySelectorAll('.faq__item');
+
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq__question');
+    const answer = item.querySelector('.faq__answer');
+
+    question.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+
+      // Close all other items
+      faqItems.forEach(other => {
+        other.classList.remove('open');
+        other.querySelector('.faq__question').setAttribute('aria-expanded', 'false');
+      });
+
+      // Toggle current
+      if (!isOpen) {
+        item.classList.add('open');
+        question.setAttribute('aria-expanded', 'true');
+        // Set exact max-height for smooth animation
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      } else {
+        answer.style.maxHeight = '0';
+      }
+    });
+
+    // Reset max-height on resize for open items
+    window.addEventListener('resize', () => {
+      if (item.classList.contains('open')) {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // ========== CONSOLE GREETING ==========
+  console.log('%c🚛 ФармАгро Логистика', 'font-size: 24px; font-weight: bold; color: #c9a84c;');
+  console.log('%cДоставка грузов из Китая в Россию', 'font-size: 14px; color: #8a96a8;');
+  console.log('%cTelegram: @nvitalikv', 'font-size: 12px; color: #c9a84c;');
+});
