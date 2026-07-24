@@ -506,133 +506,301 @@ textarea {
 .service-card__list li:first-child { padding-top: 0; }
 .service-card__list li:last-child { padding-bottom: 0; }
 
-/* Featured / Vagon card */
-.service-card--vagon {
+/* ===== VAGON BLOCK — новый дизайн по макету Эмиля ===== */
+.vagon-block {
   grid-column: 1 / -1;
-  background: linear-gradient(135deg, #1f2a1a 0%, #2a3d1f 40%, #3a5229 100%);
-  border: 2px solid var(--gold);
-  border-radius: var(--radius);
-  padding: 40px 32px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  align-items: center;
+  grid-template-columns: 1fr 320px;
+  gap: 0;
+  align-items: start;
   position: relative;
   overflow: hidden;
+  background: linear-gradient(135deg, #0f1f3d 0%, #152844 50%, #1c3354 100%);
+  border: 2px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 36px 32px 32px;
+  box-shadow: 0 8px 24px rgba(201, 168, 76, 0.1);
   transition: var(--transition);
-  box-shadow: 0 0 40px rgba(201, 168, 76, 0.12);
 }
 
-.service-card--vagon:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 50px rgba(201, 168, 76, 0.2);
+.vagon-block:hover {
+  box-shadow: 0 12px 40px rgba(201, 168, 76, 0.18);
   border-color: var(--gold-light);
 }
 
-.service-card--vagon::before {
-  content: '';
+/* Gold radial glow decoration */
+.vagon-block__glow {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
   background: radial-gradient(ellipse at 20% 50%, rgba(201, 168, 76, 0.08), transparent 70%);
   pointer-events: none;
 }
 
-.service-card--vagon .service-card__badge--hot {
-  display: inline-block;
-  font-size: 0.68rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: var(--primary);
-  background: linear-gradient(135deg, #ff6b35, #ff4444);
-  padding: 5px 18px;
-  border-radius: 20px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 12px rgba(255, 68, 68, 0.3);
-  animation: pulse-badge 2s ease-in-out infinite;
+/* ===== LEFT COLUMN ===== */
+.vagon-block__left {
+  position: relative;
+  z-index: 1;
+  padding-right: 40px;
 }
 
-@keyframes pulse-badge {
-  0%, 100% { box-shadow: 0 2px 12px rgba(255, 68, 68, 0.3); }
-  50% { box-shadow: 0 2px 20px rgba(255, 68, 68, 0.6); }
-}
-
-.service-card--vagon .service-card__title {
-  font-size: 1.4rem;
-  color: var(--gold-light);
-  margin-bottom: 8px;
-  font-weight: 700;
-}
-
-.service-card--vagon .service-card__text {
-  font-size: 0.92rem;
-  color: #c8d4b8;
-  line-height: 1.7;
-  margin-bottom: 16px;
-}
-
-.service-card--vagon .service-card__text strong {
-  color: var(--white);
-}
-
-.service-card--vagon .service-card__list li {
-  color: #b8c8a8;
-  padding: 5px 0;
-  font-size: 0.9rem;
-}
-
-.service-card--vagon .service-card__list li::before {
-  content: '🚀 ';
-}
-
-.service-card--vagon .btn--vagon {
+/* Badge */
+.vagon-block__badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 28px;
-  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-  color: var(--primary);
+  gap: 6px;
+  font-size: 0.72rem;
   font-weight: 700;
-  font-size: 0.95rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: var(--transition);
-  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #0a1628;
+  background: linear-gradient(135deg, #c9a84c, #a8882e);
+  padding: 5px 18px;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 6px rgba(168, 136, 46, 0.4);
+}
+
+/* ===== ICONS ROW ===== */
+.vagon-block__icons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.vagon-block__icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.vagon-block__icon-box {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #1a2d52;
+  border: 1px solid rgba(201, 168, 76, 0.4);
+}
+
+.vagon-block__icon-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--gold);
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* ===== TITLE ===== */
+.vagon-block__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--gold-light);
   font-family: var(--font);
-  margin-top: 8px;
+  margin-bottom: 8px;
+  line-height: 1.3;
 }
 
-.service-card--vagon .btn--vagon:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(201, 168, 76, 0.4);
+/* ===== TEXT ===== */
+.vagon-block__text {
+  font-size: 0.9rem;
+  color: #b0c0d8;
+  line-height: 1.6;
+  margin-bottom: 14px;
 }
 
-.service-card--vagon .service-card__price-badge {
-  display: inline-block;
-  font-size: 1.6rem;
+.vagon-block__text strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* ===== LIST ===== */
+.vagon-block__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.vagon-block__list li {
+  position: relative;
+  padding: 4px 0 4px 18px;
+  font-size: 0.87rem;
+  color: #a0b4d0;
+  line-height: 1.5;
+}
+
+.vagon-block__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.vagon-block__list li strong {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* ===== RIGHT COLUMN ===== */
+.vagon-block__right {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding-left: 32px;
+}
+
+/* Divider line */
+.vagon-block__divider {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #1a2d52;
+  opacity: 0.8;
+}
+
+/* Economics box */
+.vagon-block__economy {
+  width: 100%;
+  background: #0d1b33;
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  border-radius: 12px;
+  padding: 16px 20px;
+  text-align: center;
+}
+
+.vagon-block__economy-label {
+  font-size: 0.82rem;
+  color: #8899b5;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.vagon-block__economy-values {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.vagon-block__economy-value {
+  font-size: 2.2rem;
   font-weight: 800;
   color: var(--gold-light);
   font-family: var(--font-display);
-  margin-bottom: 4px;
+  line-height: 1;
 }
 
-.service-card--vagon .service-card__price-label {
-  font-size: 0.82rem;
-  color: #a0b890;
+.vagon-block__economy-value--light {
+  opacity: 0.7;
 }
 
-@media (max-width: 768px) {
-  .service-card--vagon {
+/* ===== CTA BUTTON ===== */
+.vagon-block__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #c9a84c, #a8882e);
+  color: #0a1628;
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: var(--font);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition);
+  box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
+}
+
+.vagon-block__cta:hover {
+  background: linear-gradient(135deg, #e2c76a, #c9a84c);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(201, 168, 76, 0.45);
+}
+
+.vagon-block__cta-note {
+  font-size: 0.72rem;
+  color: #6a7a96;
+  text-align: center;
+}
+
+/* ===== TRUST BADGES ===== */
+.vagon-block__trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.vagon-block__trust-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: #8899b5;
+  background: #1a2d52;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .vagon-block {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 28px;
     padding: 28px 20px;
   }
-  .service-card--vagon .service-card__title {
-    font-size: 1.2rem;
+  .vagon-block__left {
+    padding-right: 0;
   }
-  .service-card--vagon .service-card__price-badge {
-    font-size: 1.3rem;
+  .vagon-block__right {
+    padding-left: 0;
+    border-top: 1px solid #1a2d52;
+    padding-top: 24px;
+  }
+  .vagon-block__divider {
+    display: none;
+  }
+  .vagon-block__economy {
+    max-width: 320px;
+  }
+  .vagon-block__cta {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .vagon-block__icons {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .vagon-block__icon-box {
+    width: 42px;
+    height: 42px;
+  }
+  .vagon-block__title {
+    font-size: 1.1rem;
+  }
+  .vagon-block__economy-value {
+    font-size: 1.6rem;
   }
 }
 
