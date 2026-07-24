@@ -222,7 +222,9 @@
         <a href="#contacts" class="btn btn--outline">Связаться</a>
       </div>
       <div class="hero__form-wrapper reveal">
-        <form class="hero__form" id="heroForm">
+        <form class="hero__form" id="heroForm" action="send.php" method="POST">
+          <input type="hidden" name="form_type" value="quick">
+          <input type="hidden" name="website" value="" style="display:none">
           <h3 class="hero__form-title">Быстрая заявка</h3>
           <p class="hero__form-desc">Оставьте данные — мы свяжемся в течение 30 минут</p>
           <div class="form-group">
@@ -555,11 +557,23 @@
       </div>
 
       <div class="calc reveal">
-        <form class="calc__form" id="calcForm">
+        <form class="calc__form" id="calcForm" action="send.php" method="POST">
+          <input type="hidden" name="form_type" value="calc">
+          <input type="hidden" name="website" value="" style="display:none">
+          <div class="calc__row">
+            <div class="form-group">
+              <label>Имя</label>
+              <input type="text" name="name" placeholder="Ваше имя" required>
+            </div>
+            <div class="form-group">
+              <label>Телефон</label>
+              <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required>
+            </div>
+          </div>
           <div class="calc__row">
             <div class="form-group">
               <label>Тип груза</label>
-              <select name="cargoType" id="cargoType">
+              <select name="cargo_type" id="cargoType">
                 <option value="general">Сборный груз</option>
                 <option value="equipment">Оборудование</option>
                 <option value="chemicals">Химия / удобрения</option>
@@ -580,7 +594,7 @@
           <div class="calc__row">
             <div class="form-group">
               <label>Город отправления в Китае</label>
-              <select name="fromCity" id="fromCity">
+              <select name="from_city" id="fromCity">
                 <option value="guangzhou">Гуанчжоу</option>
                 <option value="shenzhen">Шэньчжэнь</option>
                 <option value="shanghai">Шанхай</option>
@@ -591,7 +605,7 @@
             </div>
             <div class="form-group">
               <label>Город назначения в РФ</label>
-              <select name="toCity" id="toCity">
+              <select name="to_city" id="toCity">
                 <option value="moscow">Москва</option>
                 <option value="spb">Санкт-Петербург</option>
                 <option value="novosibirsk">Новосибирск</option>
@@ -706,7 +720,9 @@
           </div>
         </div>
 
-        <form class="contacts__form" id="contactForm">
+        <form class="contacts__form" id="contactForm" action="send.php" method="POST">
+          <input type="hidden" name="form_type" value="contact">
+          <input type="hidden" name="website" value="" style="display:none">
           <h3>Написать нам</h3>
           <div class="form-group">
             <input type="text" name="name" placeholder="Ваше имя" required>

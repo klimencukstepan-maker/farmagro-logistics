@@ -5,6 +5,10 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Если форма отправлена через PHP — покажем тост
+  if (window.location.search.includes('sent=ok')) {
+    setTimeout(() => showToast('✅ Заявка отправлена! Мы свяжемся с вами в ближайшее время.'), 500);
+  }
 
   // ========== SCROLL ANIMATIONS (Intersection Observer) ==========
   const revealElements = document.querySelectorAll('.reveal');
@@ -202,64 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     requestAnimationFrame(update);
   }
-
-  // ========== FORM SUBMISSIONS (Telegram stub) ==========
-  const forms = document.querySelectorAll('form[id$="Form"]');
-
-  forms.forEach(form => {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const submitBtn = form.querySelector('button[type="submit"]');
-      const originalText = submitBtn.textContent;
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Отправка...';
-
-      // Collect form data
-      const formData = new FormData(form);
-      const data = {};
-      formData.forEach((value, key) => { data[key] = value; });
-
-      // Build message for Telegram
-      const formName = form.id === 'heroForm' ? 'Быстрая заявка (Hero)' :
-                       form.id === 'contactForm' ? 'Форма обратной связи' : 'Форма';
-      const message = [
-        `📩 <b>${formName}</b>`,
-        `👤 Имя: ${data.name || '—'}`,
-        `📞 Телефон: ${data.phone || '—'}`,
-        `📧 Email: ${data.email || '—'}`,
-        `💬 Сообщение: ${data.message || '—'}`
-      ].join('\n');
-
-      // Simulate sending to Telegram (placeholder — replace with real API call)
-      try {
-        // In production, uncomment and use:
-        // const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN';
-        // const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID';
-        // const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-        //   method: 'POST',
-        //   headers: { 'Content-Type': 'application/json' },
-        //   body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message, parse_mode: 'HTML' })
-        // });
-
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 1200));
-
-        showToast('✅ Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
-        form.reset();
-
-        // Reset calculator result if it's the hero form
-        if (form.id === 'heroForm') {
-          calcResult.style.display = 'none';
-        }
-      } catch (err) {
-        showToast('❌ Ошибка отправки. Попробуйте позже или напишите в Telegram');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
-      }
-    });
-  });
 
   // ========== PHONE INPUT FORMATTING ==========
   const phoneInputs = document.querySelectorAll('input[type="tel"]');
