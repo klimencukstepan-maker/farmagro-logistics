@@ -1,5 +1,5 @@
 /* ============================================
-   ФармАгро Логистика — Main Script
+   ТД Кайрос Импорт — Main Script
    ============================================ */
 
 'use strict';
@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
           calcResult.style.display = 'none';
         }
       } catch (err) {
-        showToast('❌ Ошибка отправки. Попробуйте позже или напишите в Telegram @nvitalikv');
+        showToast('❌ Ошибка отправки. Попробуйте позже или напишите в Telegram');
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;
@@ -367,7 +367,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ========== CONSOLE GREETING ==========
-  console.log('%c🚛 ФармАгро Логистика', 'font-size: 24px; font-weight: bold; color: #c9a84c;');
+  console.log('%cТД Кайрос Импорт', 'font-size: 24px; font-weight: bold; color: #c9a84c;');
   console.log('%cДоставка грузов из Китая в Россию', 'font-size: 14px; color: #8a96a8;');
-  console.log('%cTelegram: @nvitalikv', 'font-size: 12px; color: #c9a84c;');
 });
