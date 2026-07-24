@@ -506,6 +506,136 @@ textarea {
 .service-card__list li:first-child { padding-top: 0; }
 .service-card__list li:last-child { padding-bottom: 0; }
 
+/* Featured / Vagon card */
+.service-card--vagon {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, #1f2a1a 0%, #2a3d1f 40%, #3a5229 100%);
+  border: 2px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 40px 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+  box-shadow: 0 0 40px rgba(201, 168, 76, 0.12);
+}
+
+.service-card--vagon:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(201, 168, 76, 0.2);
+  border-color: var(--gold-light);
+}
+
+.service-card--vagon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(201, 168, 76, 0.08), transparent 70%);
+  pointer-events: none;
+}
+
+.service-card--vagon .service-card__badge--hot {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--primary);
+  background: linear-gradient(135deg, #ff6b35, #ff4444);
+  padding: 5px 18px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 12px rgba(255, 68, 68, 0.3);
+  animation: pulse-badge 2s ease-in-out infinite;
+}
+
+@keyframes pulse-badge {
+  0%, 100% { box-shadow: 0 2px 12px rgba(255, 68, 68, 0.3); }
+  50% { box-shadow: 0 2px 20px rgba(255, 68, 68, 0.6); }
+}
+
+.service-card--vagon .service-card__title {
+  font-size: 1.4rem;
+  color: var(--gold-light);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.service-card--vagon .service-card__text {
+  font-size: 0.92rem;
+  color: #c8d4b8;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.service-card--vagon .service-card__text strong {
+  color: var(--white);
+}
+
+.service-card--vagon .service-card__list li {
+  color: #b8c8a8;
+  padding: 5px 0;
+  font-size: 0.9rem;
+}
+
+.service-card--vagon .service-card__list li::before {
+  content: '🚀 ';
+}
+
+.service-card--vagon .btn--vagon {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  font-family: var(--font);
+  margin-top: 8px;
+}
+
+.service-card--vagon .btn--vagon:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(201, 168, 76, 0.4);
+}
+
+.service-card--vagon .service-card__price-badge {
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--gold-light);
+  font-family: var(--font-display);
+  margin-bottom: 4px;
+}
+
+.service-card--vagon .service-card__price-label {
+  font-size: 0.82rem;
+  color: #a0b890;
+}
+
+@media (max-width: 768px) {
+  .service-card--vagon {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 28px 20px;
+  }
+  .service-card--vagon .service-card__title {
+    font-size: 1.2rem;
+  }
+  .service-card--vagon .service-card__price-badge {
+    font-size: 1.3rem;
+  }
+}
+
 /* ========== ROUTE MAP ========== */
 .route {
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
