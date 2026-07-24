@@ -490,6 +490,19 @@ textarea {
   color: var(--text-light);
 }
 
+.service-card__badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--primary);
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  padding: 4px 14px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+
 .service-card__list li:first-child { padding-top: 0; }
 .service-card__list li:last-child { padding-bottom: 0; }
 
