@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Попутные вагоны — @VagonMarketBot | ТД Кайрос Импорт</title>
+  <meta name="description" content="Попутные вагоны — вези груз дёшево! Экономия до 60% на ж/д перевозках. 12 000+ вагонов в базе. Поиск попутных вагонов через Telegram-бот @VagonMarketBot.">
+  <meta name="keywords" content="попутные вагоны, жд перевозки, попутный вагон, VagonMarket, обратная загрузка вагонов, дешёвые жд перевозки">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Попутные вагоны — вези груз дёшево! | VagonMarket">
+  <meta property="og:description" content="Экономия до 60% на ж/д перевозках. 12 000+ вагонов. Поиск через @VagonMarketBot.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://проф-логист.рф/vagonmarket.html">
+  <meta property="og:locale" content="ru_RU">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================
+       VagonMarket — Standalone Page
+       Colors: #0f1f3d → #1c3354 gradient
+       Gold: #c9a84c
+       Card bg: #f6f7f9
+       ============================================ */
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --dark-start: #0f1f3d;
+      --dark-mid: #142645;
+      --dark-end: #1c3354;
+      --gold: #c9a84c;
+      --gold-light: #dfc066;
+      --gold-dark: #a8882e;
+      --card-bg: #f6f7f9;
+      --card-bg-alt: #eef0f4;
+      --white: #ffffff;
+      --text-dark: #0f1f3d;
+      --text-mid: #556677;
+      --text-light: #667788;
+      --text-faded: #8899bb;
+      --border-light: #e2e6ea;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-display: 'Playfair Display', serif;
+      --radius: 12px;
+      --radius-lg: 16px;
+      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --max-width: 1200px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: var(--font);
+      color: var(--text-dark);
+      background: var(--white);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 80px 0;
+    }
+
+    .section__header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section__title {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+
+    .section__divider {
+      width: 80px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin: 0 auto 16px;
+    }
+
+    .section__subtitle {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ========== HEADER ========== */
+    .vagon-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 72px;
+      z-index: 1000;
+      background: linear-gradient(135deg, var(--dark-start), var(--dark-end));
+      border-bottom: 1px solid rgba(201, 168, 76, 0.3);
+    }
+
+    .vagon-header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .vagon-header__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .vagon-header__logo-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 4px;
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(201, 168, 76, 0.08);
+      flex-shrink: 0;
+    }
+
+    .vagon-header__logo-box span {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .vagon-header__logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .vagon-header__logo-text strong {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .vagon-header__logo-text small {
+      font-size: 10px;
+      color: var(--text-faded);
+      font-weight: 500;
+    }
+
+    .vagon-header__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 20px;
+      border-radius: 18px;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      font-size: 14px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .vagon-header__back:hover {
+      background: rgba(201, 168, 76, 0.12);
+      color: var(--gold-light);
+    }
+
+    /* ========== HERO ========== */
+    .vagon-hero {
+      padding-top: 72px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--dark-start), var(--dark-end));
+    }
+
+    .vagon-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(45deg, rgba(201, 168, 76, 0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(201, 168, 76, 0.03) 25%, transparent 25%);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .vagon-hero__inner {
+      position: relative;
+      z-index: 2;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 60px 24px;
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .vagon-hero__title {
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 4px;
+    }
+
+    .vagon-hero__title--gold {
+      color: var(--gold);
+    }
+
+    .vagon-hero__desc {
+      font-size: 1.05rem;
+      color: var(--text-faded);
+      margin-top: 20px;
+      line-height: 1.6;
+      max-width: 520px;
+    }
+
+    /* Hero decorative train */
+    .vagon-hero__train {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .vagon-hero__train svg {
+      width: 200px;
+      height: 200px;
+    }
+
+    .vagon-hero__train-circles {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 360px;
+      height: 360px;
+      pointer-events: none;
+    }
+
+    .vagon-hero__train-circles circle {
+      fill: none;
+      stroke: var(--gold);
+      opacity: 0.06;
+    }
+
+    /* Hero stats */
+    .vagon-hero__stats {
+      display: flex;
+      gap: 16px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+
+    .vagon-hero__stat {
+      background: rgba(28, 51, 84, 0.6);
+      border-radius: 8px;
+      padding: 16px 20px;
+      min-width: 150px;
+    }
+
+    .vagon-hero__stat-label {
+      font-size: 0.78rem;
+      color: var(--text-faded);
+      font-weight: 500;
+    }
+
+    .vagon-hero__stat-value {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1.2;
+    }
+
+    /* Hero CTA */
+    .vagon-hero__actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 26px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: var(--font);
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--dark-start);
+      transition: var(--transition);
+      box-shadow: 0 4px 20px rgba(201, 168, 76, 0.35);
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(201, 168, 76, 0.5);
+    }
+
+    .btn-outline-gold {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: 26px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: var(--font);
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      background: transparent;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-outline-gold:hover {
+      background: rgba(201, 168, 76, 0.1);
+    }
+
+    /* ========== HOW IT WORKS ========== */
+    .vagon-how {
+      background: var(--white);
+    }
+
+    .vagon-how__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .vagon-how__step {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 28px 20px;
+      text-align: center;
+      transition: var(--transition);
+      box-shadow: 0 2px 8px rgba(15, 31, 61, 0.06);
+    }
+
+    .vagon-how__step:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(15, 31, 61, 0.1);
+    }
+
+    .vagon-how__step-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--dark-start), var(--dark-end));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      position: relative;
+    }
+
+    .vagon-how__step-num span {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--gold);
+    }
+
+    .vagon-how__step-num svg {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      opacity: 0.9;
+    }
+
+    .vagon-how__step h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .vagon-how__step p {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+
+    /* ========== BENEFITS ========== */
+    .vagon-benefits {
+      background: linear-gradient(135deg, var(--card-bg), var(--card-bg-alt));
+    }
+
+    .vagon-benefits__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .vagon-benefits__card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      box-shadow: 0 4px 16px rgba(15, 31, 61, 0.08);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .vagon-benefits__card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(15, 31, 61, 0.12);
+    }
+
+    .vagon-benefits__card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      opacity: 0.5;
+    }
+
+    .vagon-benefits__number {
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: var(--gold);
+      font-family: var(--font-display);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .vagon-benefits__card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .vagon-benefits__card p {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    .vagon-benefits__icon-bg {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      opacity: 0.08;
+    }
+
+    /* ========== WAGON TYPES ========== */
+    .vagon-types__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .vagon-types__item {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 24px 16px;
+      text-align: center;
+      transition: var(--transition);
+      box-shadow: 0 2px 8px rgba(15, 31, 61, 0.06);
+    }
+
+    .vagon-types__item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(15, 31, 61, 0.1);
+    }
+
+    .vagon-types__icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 12px;
+    }
+
+    .vagon-types__item h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+
+    .vagon-types__item p {
+      font-size: 0.8rem;
+      color: var(--text-mid);
+      line-height: 1.4;
+    }
+
+    /* ========== CTA SECTION ========== */
+    .vagon-cta {
+      background: linear-gradient(135deg, var(--dark-start), var(--dark-end));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vagon-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(45deg, rgba(201, 168, 76, 0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(201, 168, 76, 0.03) 25%, transparent 25%);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .vagon-cta__inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    .vagon-cta h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .vagon-cta p {
+      font-size: 1rem;
+      color: var(--text-faded);
+      margin-bottom: 28px;
+    }
+
+    .vagon-cta .btn-gold {
+      font-size: 1.1rem;
+      padding: 18px 48px;
+      border-radius: 32px;
+    }
+
+    .vagon-cta__badges {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .vagon-cta__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 16px;
+      border-radius: 12px;
+      background: rgba(28, 51, 84, 0.7);
+      color: var(--text-faded);
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    /* ========== TARGET AUDIENCE ========== */
+    .vagon-target__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .vagon-target__card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      box-shadow: 0 2px 8px rgba(15, 31, 61, 0.06);
+      transition: var(--transition);
+      border-top: 3px solid var(--gold);
+    }
+
+    .vagon-target__card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(15, 31, 61, 0.1);
+    }
+
+    .vagon-target__card svg {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 16px;
+    }
+
+    .vagon-target__card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .vagon-target__card p {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    /* ========== FAQ ========== */
+    .vagon-faq {
+      background: linear-gradient(135deg, var(--card-bg), var(--card-bg-alt));
+    }
+
+    .vagon-faq__list {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .vagon-faq__item {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(15, 31, 61, 0.06);
+    }
+
+    .vagon-faq__question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 24px;
+      background: none;
+      border: none;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: var(--font);
+      text-align: left;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .vagon-faq__question:hover {
+      color: var(--gold);
+    }
+
+    .vagon-faq__question[aria-expanded="true"] {
+      color: var(--gold);
+    }
+
+    .vagon-faq__icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--card-bg);
+      color: var(--gold);
+      font-size: 1rem;
+      font-weight: 700;
+      transition: var(--transition);
+    }
+
+    .vagon-faq__question[aria-expanded="true"] .vagon-faq__icon {
+      background: var(--gold);
+      color: var(--white);
+      transform: rotate(45deg);
+    }
+
+    .vagon-faq__answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+    }
+
+    .vagon-faq__answer > div {
+      padding: 0 24px 16px;
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .vagon-faq__item.open .vagon-faq__answer {
+      max-height: 300px;
+    }
+
+    /* ========== FOOTER ========== */
+    .vagon-footer {
+      background: linear-gradient(135deg, var(--dark-start), var(--dark-end));
+      padding: 48px 0 32px;
+    }
+
+    .vagon-footer__inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .vagon-footer__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1.5fr;
+      gap: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+    }
+
+    .vagon-footer__brand h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .vagon-footer__brand p {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    .vagon-footer__col h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    .vagon-footer__col a {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-light);
+      padding: 4px 0;
+      transition: var(--transition);
+    }
+
+    .vagon-footer__col a:hover {
+      color: var(--gold);
+    }
+
+    .vagon-footer__bot {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold) !important;
+      font-weight: 600;
+    }
+
+    .vagon-footer__copy {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-faded);
+      padding-top: 24px;
+      opacity: 0.7;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 1024px) {
+      .vagon-hero__inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+
+      .vagon-hero__desc {
+        margin: 20px auto 0;
+      }
+
+      .vagon-hero__stats {
+        justify-content: center;
+      }
+
+      .vagon-hero__actions {
+        justify-content: center;
+      }
+
+      .vagon-hero__train {
+        display: none;
+      }
+
+      .vagon-how__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .vagon-types__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .vagon-benefits__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .vagon-target__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .vagon-footer__grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section {
+        padding: 50px 0;
+      }
+
+      .vagon-header__nav {
+        display: none;
+      }
+
+      .vagon-how__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .vagon-how__step {
+        padding: 20px 14px;
+      }
+
+      .vagon-types__grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .vagon-footer__grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .vagon-hero__stat {
+        min-width: 130px;
+        padding: 12px 16px;
+      }
+
+      .vagon-hero__stat-value {
+        font-size: 1.3rem;
+      }
+
+      .vagon-benefits__card {
+        padding: 28px 24px;
+      }
+
+      .vagon-benefits__number {
+        font-size: 2.4rem;
+      }
+    }
+
+    /* ========== REVEAL ANIMATION ========== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚂</text></svg>">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="vagon-header">
+    <div class="vagon-header__inner">
+      <a href="index.html" class="vagon-header__logo">
+        <div class="vagon-header__logo-box">
+          <span>ТК</span>
+        </div>
+        <div class="vagon-header__logo-text">
+          <strong>КАЙРОС</strong>
+          <small>ИМПОРТ</small>
+        </div>
+      </a>
+      <a href="index.html" class="vagon-header__back">← На главную</a>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="vagon-hero">
+    <div class="vagon-hero__inner">
+      <div class="vagon-hero__content">
+        <h1 class="vagon-hero__title">
+          Попутные вагоны
+        </h1>
+        <h1 class="vagon-hero__title vagon-hero__title--gold">
+          — вези груз дёшево!
+        </h1>
+
+        <p class="vagon-hero__desc">
+          Найди попутный вагон среди тысяч предложений. Используй обратную загрузку и экономь до 60% на ж/д перевозках.
+        </p>
+
+        <div class="vagon-hero__stats">
+          <div class="vagon-hero__stat">
+            <div class="vagon-hero__stat-label">Экономия</div>
+            <div class="vagon-hero__stat-value">до −60%</div>
+          </div>
+          <div class="vagon-hero__stat">
+            <div class="vagon-hero__stat-label">Вагонов в базе</div>
+            <div class="vagon-hero__stat-value">12 000+</div>
+          </div>
+          <div class="vagon-hero__stat">
+            <div class="vagon-hero__stat-label">Маршруты</div>
+            <div class="vagon-hero__stat-value">РФ и СНГ</div>
+          </div>
+        </div>
+
+        <div class="vagon-hero__actions">
+          <a href="https://t.me/VagonMarketBot" target="_blank" rel="noopener" class="btn-gold">
+            Перейти в бот →
+          </a>
+          <a href="#how-it-works" class="btn-outline-gold">Подробнее</a>
+        </div>
+      </div>
+
+      <div class="vagon-hero__train">
+        <div class="vagon-hero__train-circles">
+          <circle cx="180" cy="180" r="170"/>
+          <circle cx="180" cy="180" r="110"/>
+          <circle cx="180" cy="180" r="50"/>
+        </div>
+        <svg viewBox="0 0 120 120" width="200" height="200" fill="none">
+          <rect x="0" y="30" width="80" height="40" rx="4" stroke="#c9a84c" stroke-width="2.5" fill="none" opacity="0.4"/>
+          <rect x="18" y="12" width="40" height="20" rx="4" stroke="#c9a84c" stroke-width="2" fill="none" opacity="0.4"/>
+          <circle cx="14" cy="76" r="8" stroke="#c9a84c" stroke-width="2.5" fill="none" opacity="0.4"/>
+          <circle cx="62" cy="76" r="8" stroke="#c9a84c" stroke-width="2.5" fill="none" opacity="0.4"/>
+          <rect x="6" y="38" width="14" height="10" rx="2" fill="#c9a84c" opacity="0.08"/>
+          <rect x="26" y="38" width="14" height="10" rx="2" fill="#c9a84c" opacity="0.08"/>
+          <rect x="48" y="38" width="14" height="10" rx="2" fill="#c9a84c" opacity="0.08"/>
+          <circle cx="36" cy="4" r="7" fill="#c9a84c" opacity="0.04"/>
+          <circle cx="44" cy="-2" r="5" fill="#c9a84c" opacity="0.03"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== HOW IT WORKS ========== -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="section__header reveal">
+        <h2 class="section__title">Как это работает</h2>
+        <div class="section__divider"></div>
+      </div>
+
+      <div class="vagon-how__grid">
+        <div class="vagon-how__step reveal">
+          <div class="vagon-how__step-num">
+            <span>01</span>
+            <!-- icon-step-submit -->
+            <svg viewBox="0 0 64 64" fill="none" style="display:none;">
+              <rect x="6" y="10" width="38" height="26" rx="4" stroke="#c9a84c" stroke-width="2.5" fill="none"/>
+              <rect x="10" y="16" width="30" height="4" rx="1" fill="#c9a84c" opacity="0.3"/>
+              <rect x="10" y="24" width="20" height="4" rx="1" fill="#c9a84c" opacity="0.3"/>
+            </svg>
+          </div>
+          <h3>Оставь заявку</h3>
+          <p>Опиши груз, маршрут и желаемые сроки в боте.</p>
+        </div>
+
+        <div class="vagon-how__step reveal">
+          <div class="vagon-how__step-num">
+            <span>02</span>
+          </div>
+          <h3>Выбери вагон</h3>
+          <p>Бот подберёт подходящие варианты с попутным направлением.</p>
+        </div>
+
+        <div class="vagon-how__step reveal">
+          <div class="vagon-how__step-num">
+            <span>03</span>
+          </div>
+          <h3>Согласуй отправку</h3>
+          <p>Подтверди условия с перевозчиком и получи счёт в боте.</p>
+        </div>
+
+        <div class="vagon-how__step reveal">
+          <div class="vagon-how__step-num">
+            <span>04</span>
+          </div>
+          <h3>Груз в пути</h3>
+          <p>Отслеживай движение груза через бота 24/7.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BENEFITS ========== -->
+  <section class="section vagon-benefits">
+    <div class="container">
+      <div class="section__header reveal">
+        <h2 class="section__title">Выгода для вашего бизнеса</h2>
+        <div class="section__divider"></div>
+      </div>
+
+      <div class="vagon-benefits__grid">
+        <div class="vagon-benefits__card reveal">
+          <div class="vagon-benefits__number">−40%</div>
+          <h3>Экономия на обратную загрузку</h3>
+          <p>Платите только за полезный путь. Вагон всё равно едет обратно — пусть везёт ваш груз со скидкой.</p>
+          <div class="vagon-benefits__icon-bg">
+            <svg viewBox="0 0 64 64" fill="none" width="44" height="44">
+              <rect x="4" y="22" width="56" height="28" rx="4" stroke="#c9a84c" stroke-width="2.5" fill="none"/>
+              <circle cx="32" cy="36" r="9" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <text x="32" y="40" text-anchor="middle" font-size="12" font-weight="bold" fill="#c9a84c" font-family="system-ui">%</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="vagon-benefits__card reveal">
+          <div class="vagon-benefits__number">−60%</div>
+          <h3>Скидка на попутные направления</h3>
+          <p>Максимальная загрузка порожнего пробега — минимальная цена для вас. Прозрачно, без скрытых комиссий.</p>
+          <div class="vagon-benefits__icon-bg">
+            <svg viewBox="0 0 64 64" fill="none" width="44" height="44">
+              <rect x="4" y="22" width="56" height="28" rx="4" stroke="#c9a84c" stroke-width="2.5" fill="none"/>
+              <circle cx="32" cy="36" r="9" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <text x="32" y="40" text-anchor="middle" font-size="12" font-weight="bold" fill="#c9a84c" font-family="system-ui">%</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WAGON TYPES ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="section__header reveal">
+        <h2 class="section__title">Типы вагонов</h2>
+        <div class="section__divider"></div>
+        <p class="section__subtitle">Любой подвижной состав для любых грузов</p>
+      </div>
+
+      <div class="vagon-types__grid">
+        <!-- 1. Крытый -->
+        <div class="vagon-types__item reveal">
+          <div class="vagon-types__icon">
+            <!-- icon-wagon-covered -->
+            <svg viewBox="0 0 64 64" fill="none" width="48" height="48">
+              <rect x="6" y="18" width="40" height="22" rx="3" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <path d="M6 18l12-6h16l12 6" stroke="#c9a84c" stroke-width="2" fill="none" stroke-linejoin="round"/>
+              <rect x="10" y="22" width="14" height="12" rx="1" fill="#c9a84c" opacity="0.15"/>
+              <rect x="28" y="22" width="14" height="12" rx="1" fill="#c9a84c" opacity="0.15"/>
+              <circle cx="16" cy="46" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <circle cx="40" cy="46" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <line x1="50" y1="28" x2="58" y2="28" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+              <line x1="50" y1="34" x2="58" y2="34" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Крытый</h3>
+          <p>Тарно-штучные грузы,<br>зерно, комбикорма</p>
+        </div>
+
+        <!-- 2. Полувагон -->
+        <div class="vagon-types__item reveal">
+          <div class="vagon-types__icon">
+            <!-- icon-wagon-gondola -->
+            <svg viewBox="0 0 64 64" fill="none" width="48" height="48">
+              <rect x="6" y="14" width="40" height="24" rx="3" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <line x1="6" y1="14" x2="46" y2="14" stroke="#c9a84c" stroke-width="1.5"/>
+              <rect x="10" y="22" width="12" height="10" rx="1" fill="#c9a84c" opacity="0.15"/>
+              <rect x="26" y="22" width="12" height="10" rx="1" fill="#c9a84c" opacity="0.15"/>
+              <circle cx="16" cy="44" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <circle cx="38" cy="44" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <h3>Полувагон</h3>
+          <p>Уголь, руда, щебень,<br>стройматериалы</p>
+        </div>
+
+        <!-- 3. Платформа -->
+        <div class="vagon-types__item reveal">
+          <div class="vagon-types__icon">
+            <!-- icon-wagon-platform -->
+            <svg viewBox="0 0 64 64" fill="none" width="48" height="48">
+              <rect x="6" y="20" width="40" height="8" rx="2" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <rect x="20" y="10" width="14" height="10" rx="1" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <line x1="27" y1="10" x2="27" y2="20" stroke="#c9a84c" stroke-width="1"/>
+              <line x1="20" y1="15" x2="34" y2="15" stroke="#c9a84c" stroke-width="1"/>
+              <circle cx="16" cy="40" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <circle cx="38" cy="40" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <h3>Платформа</h3>
+          <p>Контейнеры, техника,<br>трубы, пиломатериалы</p>
+        </div>
+
+        <!-- 4. Цистерна -->
+        <div class="vagon-types__item reveal">
+          <div class="vagon-types__icon">
+            <!-- icon-wagon-tank -->
+            <svg viewBox="0 0 64 64" fill="none" width="48" height="48">
+              <rect x="8" y="18" width="34" height="14" rx="7" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <rect x="12" y="22" width="26" height="6" rx="3" fill="#c9a84c" opacity="0.15"/>
+              <circle cx="16" cy="44" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <circle cx="36" cy="44" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <line x1="44" y1="22" x2="54" y2="22" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+              <line x1="44" y1="28" x2="54" y2="28" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Цистерна</h3>
+          <p>Нефть, масла, химия,<br>жидкие грузы</p>
+        </div>
+
+        <!-- 5. Рефрижератор -->
+        <div class="vagon-types__item reveal">
+          <div class="vagon-types__icon">
+            <!-- icon-wagon-refrigerator -->
+            <svg viewBox="0 0 64 64" fill="none" width="48" height="48">
+              <rect x="6" y="16" width="36" height="22" rx="3" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <rect x="6" y="16" width="36" height="12" rx="3" stroke="#c9a84c" stroke-width="1" fill="none"/>
+              <line x1="10" y1="20" x2="12" y2="20" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+              <path d="M24 28l-6-4m6 0l-6 4" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="30" y="17" width="8" height="3" rx="0.5" fill="#c9a84c" opacity="0.3"/>
+              <circle cx="14" cy="46" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <circle cx="36" cy="46" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <h3>Рефрижератор</h3>
+          <p>Продукты, медикаменты,<br>грузы с температурным<br>режимом</p>
+        </div>
+
+        <!-- 6. Хоппер -->
+        <div class="vagon-types__item reveal">
+          <div class="vagon-types__icon">
+            <!-- icon-wagon-hopper -->
+            <svg viewBox="0 0 64 64" fill="none" width="48" height="48">
+              <path d="M8 14h30l6 10v10H8V14z" stroke="#c9a84c" stroke-width="2" fill="none" stroke-linejoin="round"/>
+              <path d="M18 34l-4 6h20l-4-6" stroke="#c9a84c" stroke-width="2" fill="none" stroke-linejoin="round"/>
+              <circle cx="14" cy="48" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <circle cx="34" cy="48" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <rect x="10" y="18" width="8" height="6" rx="1" fill="#c9a84c" opacity="0.15"/>
+              <rect x="22" y="18" width="8" height="6" rx="1" fill="#c9a84c" opacity="0.15"/>
+            </svg>
+          </div>
+          <h3>Хоппер</h3>
+          <p>Цемент, удобрения,<br>зерно, сыпучие грузы</p>
+        </div>
+
+        <!-- 7. Фитинговая -->
+        <div class="vagon-types__item reveal">
+          <div class="vagon-types__icon">
+            <!-- icon-wagon-fitting -->
+            <svg viewBox="0 0 64 64" fill="none" width="48" height="48">
+              <rect x="6" y="20" width="40" height="10" rx="2" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <rect x="18" y="10" width="8" height="10" rx="2" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <rect x="30" y="10" width="8" height="10" rx="2" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <circle cx="16" cy="44" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <circle cx="38" cy="44" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <h3>Фитинговая</h3>
+          <p>Морские и сухопутные<br>контейнеры 20/40 футов</p>
+        </div>
+
+        <!-- 8. Другое -->
+        <div class="vagon-types__item reveal">
+          <div class="vagon-types__icon">
+            <!-- icon-wagon-other -->
+            <svg viewBox="0 0 64 64" fill="none" width="48" height="48">
+              <rect x="6" y="18" width="38" height="18" rx="3" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <rect x="10" y="22" width="8" height="10" rx="1" fill="#c9a84c" opacity="0.15"/>
+              <rect x="22" y="22" width="8" height="10" rx="1" fill="#c9a84c" opacity="0.15"/>
+              <rect x="34" y="22" width="6" height="10" rx="1" fill="#c9a84c" opacity="0.15"/>
+              <circle cx="14" cy="44" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <circle cx="38" cy="44" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
+              <circle cx="27" cy="18" r="2" fill="#c9a84c" opacity="0.3"/>
+            </svg>
+          </div>
+          <h3>Другое</h3>
+          <p>Спецвагоны, транспортеры,<br>ВМ, негабаритные<br>грузы</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA ========== -->
+  <section class="section vagon-cta">
+    <div class="container vagon-cta__inner reveal">
+      <h2>Готовы начать экономить?</h2>
+      <p>Переходите в Telegram-бот и получите первый расчёт за 2 минуты</p>
+      <a href="https://t.me/VagonMarketBot" target="_blank" rel="noopener" class="btn-gold">
+        🚂 Перейти в @VagonMarketBot →
+      </a>
+      <div class="vagon-cta__badges">
+        <span class="vagon-cta__badge">🔹 Быстрый старт</span>
+        <span class="vagon-cta__badge">🔹 Без комиссии</span>
+        <span class="vagon-cta__badge">🔹 24/7 поддержка</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TARGET AUDIENCE ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="section__header reveal">
+        <h2 class="section__title">Кому это подойдёт</h2>
+        <div class="section__divider"></div>
+      </div>
+
+      <div class="vagon-target__grid">
+        <div class="vagon-target__card reveal">
+          <!-- icon-owner -->
+          <svg viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="18" r="10" stroke="#c9a84c" stroke-width="2.5" fill="none"/>
+            <path d="M12 58c0-12 9-20 20-20s20 8 20 20" stroke="#c9a84c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <rect x="40" y="8" width="12" height="8" rx="2" stroke="#c9a84c" stroke-width="1.5" fill="none"/>
+            <path d="M44 12l2 2 4-4" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <h3>Собственникам грузов</h3>
+          <p>Снижайте затраты на логистику в 2 раза. Находите попутные вагоны под вашу номенклатуру и маршрут.</p>
+        </div>
+
+        <div class="vagon-target__card reveal">
+          <!-- icon-shipper -->
+          <svg viewBox="0 0 64 64" fill="none">
+            <rect x="6" y="18" width="30" height="16" rx="3" stroke="#c9a84c" stroke-width="2.5" fill="none"/>
+            <rect x="30" y="10" width="14" height="10" rx="3" stroke="#c9a84c" stroke-width="2" fill="none"/>
+            <circle cx="12" cy="42" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
+            <circle cx="32" cy="44" r="4" stroke="#c9a84c" stroke-width="2" fill="none"/>
+            <rect x="8" y="24" width="8" height="6" rx="1" fill="#c9a84c" opacity="0.3"/>
+            <rect x="20" y="24" width="8" height="6" rx="1" fill="#c9a84c" opacity="0.3"/>
+            <line x1="44" y1="18" x2="56" y2="18" stroke="#c9a84c" stroke-width="1.5" stroke-dasharray="3 2"/>
+          </svg>
+          <h3>Грузоотправителям</h3>
+          <p>Планируйте отгрузки без простоев. Заранее бронируйте попутные вагоны по фиксированной цене.</p>
+        </div>
+
+        <div class="vagon-target__card reveal">
+          <!-- icon-carrier -->
+          <svg viewBox="0 0 64 64" fill="none">
+            <path d="M8 32c0-10 4-16 12-16s12 6 12 16-4 16-12 16-12-6-12-16z" stroke="#c9a84c" stroke-width="2.5" fill="none"/>
+            <path d="M32 32c0-10 4-16 12-16s12 6 12 16-4 16-12 16-12-6-12-16z" stroke="#c9a84c" stroke-width="2" fill="none" opacity="0.6"/>
+            <path d="M28 26l-4-4-4 4" stroke="#c9a84c" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <line x1="24" y1="22" x2="24" y2="32" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <h3>Перевозчикам</h3>
+          <p>Загружайте порожний пробег. Увеличивайте доход с каждого рейса за счёт попутных грузов.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section class="section vagon-faq">
+    <div class="container">
+      <div class="section__header reveal">
+        <h2 class="section__title">Часто задаваемые вопросы</h2>
+        <div class="section__divider"></div>
+      </div>
+
+      <div class="vagon-faq__list reveal">
+        <div class="vagon-faq__item">
+          <button class="vagon-faq__question" aria-expanded="false">
+            <span>Что такое попутный вагон и как это работает?</span>
+            <span class="vagon-faq__icon">+</span>
+          </button>
+          <div class="vagon-faq__answer">
+            <div>
+              <p>Это порожний вагон, который следует в нужном вам направлении. Владельцы вагонов загружают его обратный пробег — вы получаете ставку на 40–60% ниже рыночной. Всё оформляется в @VagonMarketBot за 5 минут.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="vagon-faq__item">
+          <button class="vagon-faq__question" aria-expanded="false">
+            <span>Какие грузы можно везти попутными вагонами?</span>
+            <span class="vagon-faq__icon">+</span>
+          </button>
+          <div class="vagon-faq__answer">
+            <div>
+              <p>Практически любые: от сыпучих (зерно, уголь, удобрения) до тарно-штучных (оборудование, стройматериалы, товары народного потребления). Единственное ограничение — опасные и негабаритные грузы требуют согласования.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="vagon-faq__item">
+          <button class="vagon-faq__question" aria-expanded="false">
+            <span>Насколько это надёжно и оформлено ли юридически?</span>
+            <span class="vagon-faq__icon">+</span>
+          </button>
+          <div class="vagon-faq__answer">
+            <div>
+              <p>Все перевозки оформляются официальным договором и железнодорожной накладной. Вы работаете напрямую с владельцем вагона или через проверенного перевозчика. Прозрачные условия, полная юридическая защита.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="vagon-faq__item">
+          <button class="vagon-faq__question" aria-expanded="false">
+            <span>Как быстро я получу расчёт в боте?</span>
+            <span class="vagon-faq__icon">+</span>
+          </button>
+          <div class="vagon-faq__answer">
+            <div>
+              <p>После выбора маршрута и типа вагона бот показывает доступные варианты за 1–2 минуты. Вы сразу видите цену и контакты владельца. Всё онлайн, без ожидания звонка менеджера.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="vagon-footer">
+    <div class="vagon-footer__inner">
+      <div class="vagon-footer__grid">
+        <div class="vagon-footer__brand">
+          <h3>ТД КАЙРОС ИМПОРТ</h3>
+          <p>Внешнеэкономическая деятельность, логистика и грузоперевозки<br>Китай → Россия | РФ и СНГ</p>
+        </div>
+        <div class="vagon-footer__col">
+          <h4>Услуги</h4>
+          <a href="vagonmarket.html">Попутные вагоны</a>
+          <a href="index.html#services">Ж/Д перевозки</a>
+          <a href="index.html#services">Контейнерные перевозки</a>
+          <a href="index.html#services">Складское хранение</a>
+        </div>
+        <div class="vagon-footer__col">
+          <h4>Контакты</h4>
+          <a href="https://t.me/VagonMarketBot" target="_blank" rel="noopener" class="vagon-footer__bot">📬 @VagonMarketBot</a>
+          <a href="mailto:info@profi-logist.ru">Email: info@profi-logist.ru</a>
+          <a href="https://проф-логист.рф">Сайт: проф-логист.рф</a>
+        </div>
+      </div>
+      <div class="vagon-footer__copy">
+        © 2026 ТД Кайрос Импорт — проф-логист.рф | VagonMarket
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.vagon-faq__question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.vagon-faq__item');
+        const isOpen = item.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.vagon-faq__item.open').forEach(el => {
+          el.classList.remove('open');
+          el.querySelector('.vagon-faq__question').setAttribute('aria-expanded', 'false');
+        });
+
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
