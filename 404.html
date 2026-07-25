@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Страница не найдена (404) | ТД Кайрос Импорт</title>
+  <meta name="robots" content="noindex, follow">
+  <meta name="description" content="Страница не найдена. Перейдите на главную или в популярные разделы сайта: доставка грузов из Китая, VagonMarket, контакты.">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --gold: #C9A96E;
+      --gold-light: #dfc066;
+      --dark: #0f1f3d;
+      --dark-mid: #1c3354;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    body {
+      font-family: var(--font);
+      background: linear-gradient(135deg, var(--dark), var(--dark-mid));
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .container {
+      text-align: center;
+      max-width: 560px;
+    }
+    .error-code {
+      font-size: clamp(5rem, 12vw, 8rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 36px;
+      border-radius: 26px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      min-width: 220px;
+    }
+    .btn--primary {
+      background: linear-gradient(135deg, var(--gold), #a8882e);
+      color: var(--dark);
+      box-shadow: 0 4px 20px rgba(201,168,76,0.35);
+    }
+    .btn--primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(201,168,76,0.5);
+    }
+    .btn--outline {
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+    .btn--outline:hover {
+      background: rgba(201,168,76,0.1);
+    }
+    .links a:not(.btn) {
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .links a:not(.btn):hover {
+      color: var(--gold-light);
+      text-decoration: underline;
+    }
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      opacity: 0.3;
+      margin: 20px auto;
+    }
+    .quick-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="error-code">404</div>
+    <h1>Страница не найдена</h1>
+    <p>Возможно, страница была перемещена или удалена.<br>Попробуйте начать с главной — мы поможем с доставкой грузов из Китая в Россию.</p>
+
+    <div class="links">
+      <a href="/" class="btn btn--primary">← На главную</a>
+      <div class="divider"></div>
+      <div class="quick-links">
+        <a href="/#services">Услуги и маршруты</a>
+        <a href="/vagonmarket.html">VagonMarket — попутные вагоны</a>
+        <a href="/#calculator">Калькулятор стоимости</a>
+        <a href="/#contacts">Контакты</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
