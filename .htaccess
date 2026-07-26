@@ -1,20 +1,11 @@
 RewriteEngine On
 
-# ===== HTTPS Redirect =====
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://xn----8sbq4agjnli4d.xn--p1ai/$1 [R=301,L,QSA]
-
 # ===== 404 Custom Page =====
 ErrorDocument 404 /404.html
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ /404.html [L]
-
-# ===== HSTS (Strict Transport Security) =====
-<IfModule mod_headers.c>
-  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-</IfModule>
 
 # ===== Кэширование =====
 <IfModule mod_expires.c>
@@ -46,10 +37,3 @@ AddCharset UTF-8 .html .css .js .php .xml .svg
 # ===== Безопасность =====
 Options -Indexes
 ServerSignature Off
-
-# ===== Защита от hotlink =====
-<IfModule mod_rewrite.c>
-  RewriteCond %{HTTP_REFERER} !^$
-  RewriteCond %{HTTP_REFERER} !^https://(xn----8sbq4agjnli4d\.xn--p1ai|проф-логист\.рф)/ [NC]
-  RewriteRule \.(jpg|jpeg|png|gif|webp|svg)$ - [F,L]
-</IfModule>
