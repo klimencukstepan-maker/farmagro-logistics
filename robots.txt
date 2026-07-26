@@ -1,5 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://проф-логист.рф/sitemap.xml
-
-# ТД Кайрос Импорт — доставка грузов из Китая в Россию
+Sitemap: https://xn----8sbq4agjnli4d.xn--p1ai/sitemap.xml
