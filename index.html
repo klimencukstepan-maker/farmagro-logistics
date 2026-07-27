@@ -269,6 +269,8 @@ ym(110998990, 'init', {
         <ul class="nav__list">
           <li><a href="#hero" class="nav__link">Главная</a></li>
           <li><a href="#services" class="nav__link">Услуги</a></li>
+          <li><a href="#transit-kz" class="nav__link">Транзит через Казахстан</a></li>
+          <li><a href="#consolidation-wh" class="nav__link">Склад в Казахстане</a></li>
           <li><a href="vagonmarket.html" class="nav__link">Попутные вагоны</a></li>
           <li><a href="#advantages" class="nav__link">Преимущества</a></li>
           <li><a href="#calculator" class="nav__link">Калькулятор</a></li>
@@ -430,6 +432,290 @@ ym(110998990, 'init', {
             <li>✓ Ответственное хранение</li>
             <li>✓ Кросс-докинг</li>
           </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TRANSIT VIA KAZAKHSTAN ========== -->
+  <section class="transit-kz section" id="transit-kz">
+    <div class="transit-kz__bg"></div>
+    <div class="container">
+      <div class="section__header reveal">
+        <span class="section__tagline">Маршрут</span>
+        <h2 class="section__title">Транзит через <span class="gold">Казахстан</span></h2>
+        <p class="section__desc">
+          Короткий путь из Китая в Россию — мультимодальная перевозка с отсрочкой НДС
+        </p>
+      </div>
+
+      <div class="transit-kz__content reveal">
+        <!-- Визуальная схема маршрута -->
+        <div class="transit-kz__route">
+          <!-- Точка 1: Китай -->
+          <div class="transit-kz__stop">
+            <div class="transit-kz__stop-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#C9A96E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="1" y="3" width="15" height="13"/>
+                <rect x="16" y="5" width="7" height="11" rx="1"/>
+                <circle cx="5.5" cy="18.5" r="2.5"/>
+                <circle cx="18.5" cy="18.5" r="2.5"/>
+              </svg>
+            </div>
+            <div class="transit-kz__stop-label">
+              <span class="transit-kz__stop-name">Китай</span>
+              <span class="transit-kz__stop-detail">Забор груза фурой</span>
+            </div>
+          </div>
+
+          <!-- Соединительная линия 1 -->
+          <div class="transit-kz__connector">
+            <div class="transit-kz__connector-line"></div>
+            <div class="transit-kz__connector-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#C9A96E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="13 17 18 12 13 7"/>
+                <polyline points="6 17 11 12 6 7"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Точка 2: Казахстан / Киргизия -->
+          <div class="transit-kz__stop">
+            <div class="transit-kz__stop-icon transit-kz__stop-icon--border">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#C9A96E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div class="transit-kz__stop-label">
+              <span class="transit-kz__stop-name">Казахстан / Киргизия</span>
+              <span class="transit-kz__stop-detail">Перегрузка в вагоны</span>
+            </div>
+            <div class="transit-kz__badge">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Ключевой узел
+            </div>
+          </div>
+
+          <!-- Соединительная линия 2 -->
+          <div class="transit-kz__connector">
+            <div class="transit-kz__connector-line"></div>
+            <div class="transit-kz__connector-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#C9A96E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="13 17 18 12 13 7"/>
+                <polyline points="6 17 11 12 6 7"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Точка 3: Россия -->
+          <div class="transit-kz__stop">
+            <div class="transit-kz__stop-icon transit-kz__stop-icon--final">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#C9A96E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="12" rx="2"/>
+                <path d="M3 15v4"/>
+                <path d="M21 15v4"/>
+                <circle cx="7" cy="12" r="1.5"/>
+                <circle cx="17" cy="12" r="1.5"/>
+                <line x1="9" y1="9" x2="15" y2="9"/>
+              </svg>
+            </div>
+            <div class="transit-kz__stop-label">
+              <span class="transit-kz__stop-name">Россия</span>
+              <span class="transit-kz__stop-detail">Ж/Д до любого города</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Контентная часть под схемой -->
+        <div class="transit-kz__info">
+          <div class="transit-kz__text">
+            <p>
+              Груз из Китая едет фурой до границы с Казахстаном или Киргизией, 
+              где перегружается на железнодорожные вагоны. Такой маршрут даёт 
+              <strong>отсрочку по уплате НДС на 30 дней</strong> — вы не замораживаете 
+              оборотку на таможне. Полное ВЭД-сопровождение берём на себя, 
+              срок доставки — <strong>18–25 дней</strong>.
+            </p>
+          </div>
+
+          <ul class="transit-kz__bullets">
+            <li>
+              <span class="transit-kz__bullet-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#C9A96E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+              <span><strong>Отсрочка НДС на 30 дней</strong> — деньги остаются в обороте</span>
+            </li>
+            <li>
+              <span class="transit-kz__bullet-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#C9A96E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+              <span><strong>Полное ВЭД-сопровождение:</strong> документы, сертификация, таможня</span>
+            </li>
+            <li>
+              <span class="transit-kz__bullet-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#C9A96E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+              <span><strong>Срок 18–25 дней</strong> от поставщика до получателя в РФ</span>
+            </li>
+          </ul>
+
+          <div class="transit-kz__cta-row">
+            <div class="transit-kz__metric">
+              <span class="transit-kz__metric-value">18–25</span>
+              <span class="transit-kz__metric-unit">дней</span>
+              <span class="transit-kz__metric-label">Срок доставки</span>
+            </div>
+            <a href="#calculator" class="btn btn--primary">Рассчитать стоимость</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONSOLIDATION WAREHOUSE IN KAZAKHSTAN ========== -->
+  <section class="consolidation-wh section" id="consolidation-wh">
+    <div class="container">
+      <div class="section__header reveal">
+        <span class="section__tagline">Экономия</span>
+        <h2 class="section__title">Консолидированный склад <span class="gold">в Казахстане</span></h2>
+        <p class="section__desc">
+          Одна партия — одна доставка. Объединяем грузы от разных поставщиков и сокращаем ваши расходы до 30%
+        </p>
+      </div>
+
+      <div class="consolidation-wh__grid reveal">
+        <!-- Визуальная схема склада-хаба -->
+        <div class="consolidation-wh__diagram">
+          <div class="consolidation-wh__diagram-bg"></div>
+
+          <!-- Входящие потоки от поставщиков -->
+          <div class="consolidation-wh__flow consolidation-wh__flow--top-left">
+            <div class="consolidation-wh__flow-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#C9A96E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="1" y="3" width="15" height="13"/>
+                <circle cx="5.5" cy="18.5" r="2.5"/>
+              </svg>
+            </div>
+            <span class="consolidation-wh__flow-label">Поставщик 1</span>
+          </div>
+          <div class="consolidation-wh__flow consolidation-wh__flow--top-center">
+            <div class="consolidation-wh__flow-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#C9A96E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="1" y="3" width="15" height="13"/>
+                <circle cx="5.5" cy="18.5" r="2.5"/>
+              </svg>
+            </div>
+            <span class="consolidation-wh__flow-label">Поставщик 2</span>
+          </div>
+          <div class="consolidation-wh__flow consolidation-wh__flow--top-right">
+            <div class="consolidation-wh__flow-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#C9A96E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="1" y="3" width="15" height="13"/>
+                <circle cx="5.5" cy="18.5" r="2.5"/>
+              </svg>
+            </div>
+            <span class="consolidation-wh__flow-label">Поставщик 3</span>
+          </div>
+
+          <!-- Стрелки схода (SVG-линии) -->
+          <svg class="consolidation-wh__arrows" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <!-- Левая стрелка схода -->
+            <path d="M80 10 L80 80 Q80 100 120 110 L200 130" fill="none" stroke="rgba(201,168,78,0.25)" stroke-width="2" stroke-dasharray="4 4"/>
+            <polyline points="190,122 200,130 193,138" fill="none" stroke="rgba(201,168,78,0.35)" stroke-width="2"/>
+            <!-- Центральная стрелка -->
+            <line x1="200" y1="10" x2="200" y2="120" stroke="rgba(201,168,78,0.3)" stroke-width="2" stroke-dasharray="4 4"/>
+            <polyline points="193,112 200,120 207,112" fill="none" stroke="rgba(201,168,78,0.4)" stroke-width="2"/>
+            <!-- Правая стрелка схода -->
+            <path d="M320 10 L320 80 Q320 100 280 110 L200 130" fill="none" stroke="rgba(201,168,78,0.25)" stroke-width="2" stroke-dasharray="4 4"/>
+            <polyline points="210,122 200,130 207,138" fill="none" stroke="rgba(201,168,78,0.35)" stroke-width="2"/>
+            <!-- Исходящая стрелка -->
+            <line x1="200" y1="160" x2="200" y2="190" stroke="rgba(201,168,78,0.5)" stroke-width="2.5" stroke-dasharray="6 3"/>
+            <polyline points="193,182 200,190 207,182" fill="none" stroke="#C9A96E" stroke-width="2.5"/>
+          </svg>
+
+          <!-- Центральный хаб -->
+          <div class="consolidation-wh__hub">
+            <div class="consolidation-wh__hub-glow"></div>
+            <div class="consolidation-wh__hub-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#C9A96E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 21V9l9-6 9 6v12"/>
+                <path d="M9 21v-8h6v8"/>
+              </svg>
+            </div>
+            <div class="consolidation-wh__hub-title">Склад-хаб</div>
+            <div class="consolidation-wh__hub-subtitle">Казахстан / Киргизия</div>
+          </div>
+
+          <!-- Исходящий поток в РФ -->
+          <div class="consolidation-wh__flow consolidation-wh__flow--bottom">
+            <div class="consolidation-wh__flow-icon consolidation-wh__flow-icon--out">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#C9A96E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="1" y="3" width="15" height="13"/>
+                <rect x="16" y="5" width="7" height="11" rx="1"/>
+                <circle cx="5.5" cy="18.5" r="2.5"/>
+                <circle cx="18.5" cy="18.5" r="2.5"/>
+              </svg>
+            </div>
+            <span class="consolidation-wh__flow-label">Одна партия → в РФ</span>
+          </div>
+        </div>
+
+        <!-- Текстовый блок с преимуществами -->
+        <div class="consolidation-wh__info">
+          <div class="consolidation-wh__text">
+            <p>
+              На границе Казахстана и Киргизии у нас собственный консолидированный склад. 
+              Сюда стекаются грузы от разных поставщиков из Китая, объединяются 
+              в одну партию и отправляются одной фурой или вагоном в Россию. 
+              Вы платите за логистику <strong>один раз</strong>, а не за каждую поставку 
+              по отдельности — особенно выгодно для малого и среднего бизнеса.
+            </p>
+          </div>
+
+          <ul class="consolidation-wh__bullets">
+            <li>
+              <span class="consolidation-wh__bullet-marker">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#C9A96E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+              <span><strong>Склад на границе</strong> — грузы из Китая накапливаются в одной точке</span>
+            </li>
+            <li>
+              <span class="consolidation-wh__bullet-marker">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#C9A96E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+              <span><strong>Одна партия вместо нескольких</strong> — меньше затрат на доставку</span>
+            </li>
+            <li>
+              <span class="consolidation-wh__bullet-marker">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#C9A96E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+              <span><strong>Экономия до 30% на фрахте</strong> за счёт объединения</span>
+            </li>
+          </ul>
+
+          <!-- Метрика экономии -->
+          <div class="consolidation-wh__economy">
+            <div class="consolidation-wh__economy-value">до 30%</div>
+            <div class="consolidation-wh__economy-label">экономия на доставке</div>
+            <div class="consolidation-wh__economy-text">при консолидации сборных грузов</div>
+          </div>
+
+          <a href="#calculator" class="btn btn--primary">Рассчитать выгоду</a>
         </div>
       </div>
     </div>
