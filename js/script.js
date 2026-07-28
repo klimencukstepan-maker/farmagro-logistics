@@ -59,25 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
     link.addEventListener('click', closeMenu);
   });
 
-  // Mobile dropdown toggle
-  const dropdownToggles = document.querySelectorAll('.nav__link--dropdown-toggle');
-
-  dropdownToggles.forEach(toggle => {
-    toggle.addEventListener('click', (e) => {
-      // Only handle on mobile (when nav is open as a sidebar)
-      if (window.innerWidth <= 768) {
-        e.preventDefault();
-        const parent = toggle.closest('.nav__item--dropdown');
-        parent.classList.toggle('open');
-      }
-    });
-  });
-
-  // Close dropdown when a dropdown link is clicked on mobile
-  document.querySelectorAll('.nav__dropdown-link').forEach(link => {
-    link.addEventListener('click', closeMenu);
-  });
-
   // Close on outside click
   document.addEventListener('click', (e) => {
     if (nav.classList.contains('open') &&
