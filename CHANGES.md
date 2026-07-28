@@ -50,3 +50,35 @@
 ## 5. Обновлён style.min.css
 
 Выполнено: `cat css/style.css | npx csso --output css/style.min.css`
+
+---
+
+## 6. Редизайн схемы склада-хаба — по эскизу дизайнера
+
+**Файлы:** `index.html`, `css/style.css`
+
+**Что сделано:** Полностью переработана секция `#consolidation-wh` — схема Y-образного слияния грузов от 3 поставщиков в консолидированный хаб.
+
+**HTML (`index.html`):**
+- Удалена устаревшая вёрстка с `cw-*`/`consolidation-wh__flow--*` классами и `position: absolute` для узлов
+- Добавлена новая flexbox-схема по спецификации `scheme_design.md`:
+  - Верхний ряд: 3 узла поставщиков (`consolidation-wh__node`) с разделителями (`consolidation-wh__gap`)
+  - Y-образное слияние: inline SVG `viewBox="0 0 320 40"` с тремя стрелками схода и общей стрелкой к хабу
+  - Центральный хаб (`consolidation-wh__hub`) с золотой обводкой, градиентом и пульсацией
+  - Стрелка вниз (`consolidation-wh__down-arrow`) к нижнему блоку
+  - Нижний блок (`consolidation-wh__bottom`) — «Одна партия → в РФ»
+  - Текстовый блок справа: текст, буллеты с `bg-card`/hover, блок экономии (`consolidation-wh__economy`) с левой золотой полосой, CTA кнопка
+
+**CSS (`css/style.css`):**
+- Удалены старые стили `.cw-*` (flex, top-row, node, hub, arrow, merge и т.д.) — 24 селектора
+- Полностью переписаны стили `.consolidation-wh__*` по спецификации:
+  - Анимация `hubGlowPulse` для хаба (3s ease-in-out)
+  - Hover-эффекты: узлы → border + shadow + translateY(-2px); хаб → border gold-light + shadow; нижний блок → border gold + translateY(-1px); буллеты → border + bg + translateX(4px)
+  - Блок экономии: `linear-gradient` фон, `::before` с золотой левой полосой 3px
+  - Все цвета из CSS-переменных (`--gold`, `--primary`, `--bg-card`, `--border`, `--text-light` и т.д.)
+- Мобильная адаптация (≤768px): уменьшенные узлы (88px), хаб (18/24px), bottom; схема переключается в 1 колонку
+- Мобильная адаптация (≤480px): ещё более компактные размеры (72px узлы, 28px gap, 14/20px хаб)
+
+**Брейкпоинты:**
+- ≤768px: grid → 1 колонка; узлы 88px; хаб padding 18px 24px
+- ≤480px: узлы 72px; gap 18px; хаб padding 14px 20px; экономия 1.6rem

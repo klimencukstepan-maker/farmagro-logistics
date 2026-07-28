@@ -1662,9 +1662,11 @@ textarea {
   letter-spacing: 1px;
 }
 
-/* ========== CONSOLIDATION WAREHOUSE (MISSING STYLES) ========== */
+/* ========== CONSOLIDATION WAREHOUSE SCHEME (NEW FLEXBOX DESIGN) ========== */
 .consolidation-wh {
   background: var(--primary);
+  position: relative;
+  border-bottom: 1px solid var(--border);
 }
 
 .consolidation-wh__grid {
@@ -1676,10 +1678,12 @@ textarea {
 
 .consolidation-wh__diagram {
   position: relative;
-  aspect-ratio: 2 / 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0;
+  width: 100%;
   padding: 40px 20px;
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -1694,69 +1698,92 @@ textarea {
   pointer-events: none;
 }
 
-.consolidation-wh__flow {
-  position: absolute;
+/* ===== Верхний ряд: 3 поставщика ===== */
+.consolidation-wh__top-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  z-index: 2;
+  margin-bottom: 0;
+}
+
+.consolidation-wh__node {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  z-index: 2;
+  gap: 8px;
+  padding: 10px 14px;
+  width: 108px;
 }
 
-.consolidation-wh__flow--top-left {
-  top: 12px;
-  left: 10%;
-}
-
-.consolidation-wh__flow--top-center {
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.consolidation-wh__flow--top-right {
-  top: 12px;
-  right: 10%;
-}
-
-.consolidation-wh__flow--bottom {
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.consolidation-wh__flow-icon {
-  width: 40px;
-  height: 40px;
+.consolidation-wh__node-icon {
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: rgba(201, 168, 78, 0.1);
-  border: 1px solid rgba(201, 168, 78, 0.25);
+  background: rgba(201, 168, 78, 0.08);
+  border: 1px solid rgba(201, 168, 78, 0.2);
+  transition: var(--transition);
 }
 
-.consolidation-wh__flow-icon--out {
-  background: rgba(201, 168, 78, 0.15);
+.consolidation-wh__node:hover .consolidation-wh__node-icon {
   border-color: var(--gold);
+  box-shadow: 0 0 16px rgba(201, 168, 78, 0.15);
+  background: rgba(201, 168, 78, 0.12);
+  transform: translateY(-2px);
 }
 
-.consolidation-wh__flow-label {
-  font-size: 0.72rem;
+.consolidation-wh__node-label {
+  font-size: 0.7rem;
   color: var(--text-light);
   font-weight: 500;
   white-space: nowrap;
+  text-align: center;
 }
 
-.consolidation-wh__arrows {
-  position: absolute;
-  inset: 0;
+.consolidation-wh__gap {
+  position: relative;
+  width: 48px;
+  height: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.consolidation-wh__gap-line {
   width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(201, 168, 78, 0.1) 0%,
+    rgba(201, 168, 78, 0.35) 50%,
+    rgba(201, 168, 78, 0.1) 100%
+  );
 }
 
+.consolidation-wh__gap-arrow {
+  position: absolute;
+  right: -2px;
+  width: 16px;
+  height: 16px;
+  opacity: 0.45;
+}
+
+/* ===== SVG-стрелки слияния ===== */
+.consolidation-wh__arrows {
+  display: block;
+  width: 100%;
+  height: 36px;
+  z-index: 2;
+  position: relative;
+}
+
+/* ===== Хаб ===== */
 .consolidation-wh__hub {
   position: relative;
   z-index: 3;
@@ -1765,51 +1792,150 @@ textarea {
   align-items: center;
   gap: 6px;
   text-align: center;
-  padding: 28px 36px;
-  background: rgba(201, 168, 78, 0.06);
-  border: 1px solid rgba(201, 168, 78, 0.2);
+  padding: 24px 36px;
+  background: linear-gradient(135deg, var(--primary-lighter), var(--primary-light));
+  border: 2px solid var(--gold);
   border-radius: var(--radius);
+  box-shadow:
+    0 4px 24px rgba(201, 168, 78, 0.12),
+    inset 0 1px 0 rgba(201, 168, 78, 0.08);
+  margin: 4px 0;
+  animation: hubGlowPulse 3s ease-in-out infinite;
+}
+
+@keyframes hubGlowPulse {
+  0%, 100% { box-shadow: 0 4px 24px rgba(201, 168, 78, 0.12); }
+  50% { box-shadow: 0 4px 32px rgba(201, 168, 78, 0.22); }
 }
 
 .consolidation-wh__hub-glow {
   position: absolute;
-  inset: -20px;
-  background: radial-gradient(ellipse at center, rgba(201, 168, 78, 0.08), transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  height: 85%;
+  background: radial-gradient(circle, rgba(201, 168, 78, 0.08), transparent 70%);
   pointer-events: none;
   z-index: -1;
 }
 
 .consolidation-wh__hub-icon {
+  position: relative;
+  z-index: 1;
   margin-bottom: 4px;
 }
 
 .consolidation-wh__hub-title {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  color: var(--white);
-  font-family: var(--font-display);
+  color: var(--gold);
+  font-family: var(--font);
+  letter-spacing: 0.3px;
 }
 
 .consolidation-wh__hub-subtitle {
-  font-size: 0.78rem;
-  color: var(--gold);
-  opacity: 0.8;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  font-weight: 500;
 }
 
+.consolidation-wh__hub:hover {
+  border-color: var(--gold-light);
+  box-shadow:
+    0 6px 32px rgba(201, 168, 78, 0.18),
+    inset 0 1px 0 rgba(201, 168, 78, 0.12);
+  transform: translateY(-2px);
+  transition: var(--transition);
+}
+
+.consolidation-wh__hub:hover .consolidation-wh__hub-glow {
+  opacity: 1;
+  background: radial-gradient(circle, rgba(201, 168, 78, 0.12), transparent 70%);
+}
+
+/* ===== Стрелка вниз к нижнему блоку ===== */
+.consolidation-wh__down-arrow {
+  width: 2px;
+  height: 22px;
+  background: linear-gradient(to bottom, rgba(201, 168, 78, 0.4), rgba(201, 168, 78, 0.6));
+  position: relative;
+  z-index: 2;
+}
+
+.consolidation-wh__down-arrow::after {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid rgba(201, 168, 78, 0.6);
+}
+
+/* ===== Нижний блок: одна партия → в РФ ===== */
+.consolidation-wh__bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: rgba(201, 168, 78, 0.05);
+  border: 1px solid rgba(201, 168, 78, 0.2);
+  border-radius: var(--radius-sm);
+  margin-top: 4px;
+  position: relative;
+  z-index: 3;
+}
+
+.consolidation-wh__bottom-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(201, 168, 78, 0.12), rgba(201, 168, 78, 0.18));
+  border: 1px solid var(--gold);
+}
+
+.consolidation-wh__bottom-icon svg {
+  stroke: var(--gold);
+}
+
+.consolidation-wh__bottom-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.consolidation-wh__bottom:hover {
+  border-color: var(--gold);
+  background: rgba(201, 168, 78, 0.08);
+  transform: translateY(-1px);
+  transition: var(--transition);
+}
+
+/* ===== Текстовый блок (правая колонка) ===== */
 .consolidation-wh__info {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
 .consolidation-wh__text {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--text);
   line-height: 1.7;
 }
 
 .consolidation-wh__text strong {
-  color: var(--white);
+  color: var(--gold);
+  font-weight: 600;
 }
 
 .consolidation-wh__bullets {
@@ -1821,27 +1947,64 @@ textarea {
 .consolidation-wh__bullets li {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  font-size: 0.9rem;
+  gap: 14px;
+  font-size: 0.92rem;
   color: var(--text);
   line-height: 1.5;
+  padding: 14px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  cursor: default;
+}
+
+.consolidation-wh__bullets li:hover {
+  border-color: rgba(201, 168, 78, 0.2);
+  background: var(--bg-card-hover);
+  transform: translateX(4px);
 }
 
 .consolidation-wh__bullets li strong {
   color: var(--white);
+  font-weight: 600;
 }
 
 .consolidation-wh__bullet-marker {
   flex-shrink: 0;
-  margin-top: 3px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(201, 168, 78, 0.1);
+  margin-top: 1px;
 }
 
+/* ===== Блок экономии ===== */
 .consolidation-wh__economy {
-  text-align: center;
-  padding: 24px;
-  background: var(--bg-card);
-  border: 1px solid var(--gold);
-  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, rgba(201, 168, 78, 0.08), rgba(201, 168, 78, 0.03));
+  border: 1px solid rgba(201, 168, 78, 0.2);
+  border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
+}
+
+.consolidation-wh__economy::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--gold), var(--gold-dark));
+  border-radius: 2px;
 }
 
 .consolidation-wh__economy-value {
@@ -1849,21 +2012,19 @@ textarea {
   font-weight: 800;
   color: var(--gold);
   font-family: var(--font-display);
-  line-height: 1.1;
-  margin-bottom: 4px;
+  line-height: 1;
 }
 
 .consolidation-wh__economy-label {
-  font-size: 0.85rem;
-  color: var(--text-light);
-  font-weight: 500;
-  margin-bottom: 2px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
 }
 
 .consolidation-wh__economy-text {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: var(--text-light);
-  opacity: 0.7;
+  margin-top: 2px;
 }
 
 /* ========== HERO FORM (direct class - ensures form block displays) ========== */
@@ -1899,25 +2060,80 @@ textarea {
 
   .consolidation-wh__grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 36px;
   }
 
   .consolidation-wh__diagram {
-    aspect-ratio: auto;
-    min-height: 300px;
     padding: 32px 16px;
+    min-height: 280px;
   }
 
-  .consolidation-wh__flow--top-left {
-    left: 5%;
+  .consolidation-wh__node {
+    width: 88px;
+    padding: 8px 10px;
   }
 
-  .consolidation-wh__flow--top-right {
-    right: 5%;
+  .consolidation-wh__node-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .consolidation-wh__node-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .consolidation-wh__node-label {
+    font-size: 0.62rem;
+  }
+
+  .consolidation-wh__gap {
+    width: 28px;
   }
 
   .consolidation-wh__hub {
-    padding: 20px 24px;
+    padding: 18px 24px;
+  }
+
+  .consolidation-wh__hub-icon svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .consolidation-wh__hub-title {
+    font-size: 1rem;
+  }
+
+  .consolidation-wh__hub-subtitle {
+    font-size: 0.68rem;
+  }
+
+  .consolidation-wh__bottom {
+    padding: 6px 14px;
+  }
+
+  .consolidation-wh__bottom-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .consolidation-wh__bottom-label {
+    font-size: 0.7rem;
+  }
+
+  .consolidation-wh__arrows {
+    max-height: 30px;
+    height: 30px;
+  }
+
+  .consolidation-wh__economy-value {
+    font-size: 1.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .consolidation-wh__grid {
+    gap: 36px;
   }
 }
 
@@ -1932,203 +2148,104 @@ textarea {
 
   .section__tagline::before,
   .section__tagline::after { width: 20px; margin: 0 8px; }
+
+  /* Consolidation-wh responsive 480px */
+  .consolidation-wh__grid {
+    gap: 28px;
+  }
+
+  .consolidation-wh__diagram {
+    padding: 24px 12px;
+    min-height: 240px;
+  }
+
+  .consolidation-wh__top-row {
+    gap: 0;
+  }
+
+  .consolidation-wh__node {
+    width: 72px;
+    padding: 6px 6px;
+    gap: 5px;
+  }
+
+  .consolidation-wh__node-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .consolidation-wh__node-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .consolidation-wh__node-label {
+    font-size: 0.55rem;
+  }
+
+  .consolidation-wh__gap {
+    width: 18px;
+  }
+
+  .consolidation-wh__hub {
+    padding: 14px 20px;
+    gap: 4px;
+  }
+
+  .consolidation-wh__hub-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .consolidation-wh__hub-title {
+    font-size: 0.85rem;
+  }
+
+  .consolidation-wh__hub-subtitle {
+    font-size: 0.62rem;
+  }
+
+  .consolidation-wh__arrows {
+    max-height: 24px;
+    height: 24px;
+  }
+
+  .consolidation-wh__bottom {
+    padding: 5px 12px;
+    gap: 4px;
+  }
+
+  .consolidation-wh__bottom-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .consolidation-wh__bottom-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .consolidation-wh__bottom-label {
+    font-size: 0.62rem;
+  }
+
+  .consolidation-wh__economy {
+    padding: 16px 18px;
+  }
+
+  .consolidation-wh__economy-value {
+    font-size: 1.6rem;
+  }
+
+  .consolidation-wh__economy-label {
+    font-size: 0.88rem;
+  }
+
+  .consolidation-wh__economy-text {
+    font-size: 0.75rem;
+  }
 }
 
 
-/* --- Новая схема склада-хаба (flexbox) --- */
-.cw-flex {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-  width: 100%;
-  padding: 10px 0;
-}
 
-.cw-top-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  width: 100%;
-}
 
-.cw-node {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  background: rgba(201, 168, 78, 0.04);
-  border: 1px solid rgba(201, 168, 78, 0.15);
-  border-radius: 10px;
-  width: 100px;
-}
-
-.cw-node-icon {
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: rgba(201, 168, 78, 0.1);
-  border: 1px solid rgba(201, 168, 78, 0.2);
-}
-
-.cw-node-icon--out {
-  background: rgba(201, 168, 78, 0.15);
-  border-color: rgba(201, 168, 78, 0.4);
-}
-
-.cw-node-label {
-  font-size: 0.7rem;
-  color: var(--text-light);
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.cw-top-gap {
-  position: relative;
-  width: 40px;
-  height: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cw-top-line {
-  width: 100%;
-  height: 2px;
-  background: rgba(201, 168, 78, 0.25);
-}
-
-.cw-top-arrow-down {
-  position: absolute;
-  right: 0;
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 6px solid rgba(201, 168, 78, 0.35);
-  transform: rotate(90deg);
-}
-
-.cw-merge-row {
-  display: flex;
-  align-items: stretch;
-  width: 80%;
-  height: 20px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.cw-merge-left {
-  flex: 1;
-  border-right: 2px solid rgba(201, 168, 78, 0.2);
-  height: 50%;
-}
-
-.cw-merge-line {
-  width: 2px;
-  background: rgba(201, 168, 78, 0.3);
-  height: 100%;
-  position: relative;
-}
-
-.cw-merge-right {
-  flex: 1;
-  border-left: 2px solid rgba(201, 168, 78, 0.2);
-  height: 50%;
-  align-self: flex-end;
-}
-
-.cw-merge-arrow {
-  width: 0;
-  height: 0;
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-top: 9px solid rgba(201, 168, 78, 0.4);
-  margin: 0 auto;
-}
-
-.cw-hub {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  text-align: center;
-  padding: 18px 28px;
-  background: rgba(201, 168, 78, 0.06);
-  border: 1px solid rgba(201, 168, 78, 0.2);
-  border-radius: var(--radius);
-  margin: 8px 0;
-  z-index: 3;
-}
-
-.cw-hub-glow {
-  position: absolute;
-  inset: -12px;
-  background: radial-gradient(ellipse at center, rgba(201, 168, 78, 0.08), transparent 70%);
-  pointer-events: none;
-  z-index: -1;
-}
-
-.cw-hub-icon {
-  margin-bottom: 2px;
-}
-
-.cw-hub-title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--white);
-  font-family: var(--font-display);
-}
-
-.cw-hub-subtitle {
-  font-size: 0.72rem;
-  color: var(--gold);
-  opacity: 0.8;
-}
-
-.cw-down-arrow {
-  width: 2px;
-  height: 22px;
-  background: linear-gradient(to bottom, rgba(201, 168, 78, 0.4), rgba(201, 168, 78, 0.6));
-  position: relative;
-  margin: 0 auto;
-}
-
-.cw-down-arrow::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 8px solid rgba(201, 168, 78, 0.6);
-}
-
-.cw-bottom {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  background: rgba(201, 168, 78, 0.04);
-  border: 1px solid rgba(201, 168, 78, 0.2);
-  border-radius: 10px;
-  margin-top: 4px;
-}
-
-@media (max-width: 500px) {
-  .cw-node { width: 80px; padding: 6px 8px; }
-  .cw-top-gap { width: 20px; }
-  .cw-hub { padding: 14px 18px; }
-}
