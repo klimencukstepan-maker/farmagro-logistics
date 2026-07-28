@@ -596,40 +596,32 @@ ym(110998990, 'init', {
       </div>
 
       <div class="consolidation-wh__grid reveal">
-                <!-- Визуальная схема склада-хаба (flexbox) -->
+                <!-- Визуальная схема склада-хаба (flexbox, по эскизу) -->
         <div class="consolidation-wh__diagram">
           <div class="consolidation-wh__diagram-bg"></div>
-
           <div class="cw-flex">
+
             <!-- Верхний ряд: три поставщика -->
             <div class="cw-top-row">
               <div class="cw-node">
                 <div class="cw-node-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#C9A96E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C9A96E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <rect x="1" y="3" width="15" height="13"/><circle cx="5.5" cy="18.5" r="2.5"/>
                   </svg>
                 </div>
                 <span class="cw-node-label">Поставщик 1</span>
               </div>
-              <div class="cw-top-gap">
-                <div class="cw-top-line"></div>
-                <div class="cw-top-arrow-down"></div>
-              </div>
               <div class="cw-node">
                 <div class="cw-node-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#C9A96E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C9A96E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <rect x="1" y="3" width="15" height="13"/><circle cx="5.5" cy="18.5" r="2.5"/>
                   </svg>
                 </div>
                 <span class="cw-node-label">Поставщик 2</span>
               </div>
-              <div class="cw-top-gap">
-                <div class="cw-top-line"></div>
-                <div class="cw-top-arrow-down"></div>
-              </div>
               <div class="cw-node">
                 <div class="cw-node-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#C9A96E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C9A96E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <rect x="1" y="3" width="15" height="13"/><circle cx="5.5" cy="18.5" r="2.5"/>
                   </svg>
                 </div>
@@ -637,7 +629,14 @@ ym(110998990, 'init', {
               </div>
             </div>
 
-            <!-- Соединительная линия от трёх к центру -->
+            <!-- Линии вниз от каждого поставщика -->
+            <div class="cw-node-lines">
+              <div class="cw-node-line"></div>
+              <div class="cw-node-line cw-node-line--mid"></div>
+              <div class="cw-node-line"></div>
+            </div>
+
+            <!-- Y-образное слияние -->
             <div class="cw-merge-row">
               <div class="cw-merge-left"></div>
               <div class="cw-merge-line"></div>
@@ -645,6 +644,9 @@ ym(110998990, 'init', {
             </div>
 
             <div class="cw-merge-arrow"></div>
+
+            <!-- Вертикальная линия до хаба -->
+            <div class="cw-connector-line"></div>
 
             <!-- Центральный хаб -->
             <div class="cw-hub">
@@ -658,65 +660,23 @@ ym(110998990, 'init', {
               <div class="cw-hub-subtitle">Казахстан / Киргизия</div>
             </div>
 
-            <!-- Стрелка вниз к РФ -->
+            <!-- Стрелка вниз -->
             <div class="cw-down-arrow"></div>
 
             <!-- Нижний блок: РФ -->
             <div class="cw-bottom">
               <div class="cw-node-icon cw-node-icon--out">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#C9A96E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C9A96E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <rect x="1" y="3" width="15" height="13"/><rect x="16" y="5" width="7" height="11" rx="1"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
                 </svg>
               </div>
-              <span class="cw-node-label">Одна партия → в РФ</span>
+              <span class="cw-bottom-label">Одна партия → в РФ</span>
             </div>
+
           </div>
         </div>
-        </div>
-            <span class="consolidation-wh__flow-label">Поставщик 2</span>
-          </div>
-          <div class="consolidation-wh__flow consolidation-wh__flow--top-right">
-            <div class="consolidation-wh__flow-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#C9A96E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="1" y="3" width="15" height="13"/>
-                <circle cx="5.5" cy="18.5" r="2.5"/>
-              </svg>
+              <span class="cw-node-label cw-bottom-label">Одна партия → в РФ</span>
             </div>
-            <span class="consolidation-wh__flow-label">Поставщик 3</span>
-          </div>
-
-          <!-- Стрелки схода (CSS-линии) -->
-          <div class="consolidation-wh__arrow-connector" aria-hidden="true">
-            <div class="cw-arrow cw-arrow--left"></div>
-            <div class="cw-arrow cw-arrow--center"></div>
-            <div class="cw-arrow cw-arrow--right"></div>
-            <div class="cw-arrow cw-arrow--down"></div>
-          </div>
-
-          <!-- Центральный хаб -->
-          <div class="consolidation-wh__hub">
-            <div class="consolidation-wh__hub-glow"></div>
-            <div class="consolidation-wh__hub-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#C9A96E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M3 21V9l9-6 9 6v12"/>
-                <path d="M9 21v-8h6v8"/>
-              </svg>
-            </div>
-            <div class="consolidation-wh__hub-title">Склад-хаб</div>
-            <div class="consolidation-wh__hub-subtitle">Казахстан / Киргизия</div>
-          </div>
-
-          <!-- Исходящий поток в РФ -->
-          <div class="consolidation-wh__flow consolidation-wh__flow--bottom">
-            <div class="consolidation-wh__flow-icon consolidation-wh__flow-icon--out">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#C9A96E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="1" y="3" width="15" height="13"/>
-                <rect x="16" y="5" width="7" height="11" rx="1"/>
-                <circle cx="5.5" cy="18.5" r="2.5"/>
-                <circle cx="18.5" cy="18.5" r="2.5"/>
-              </svg>
-            </div>
-            <span class="consolidation-wh__flow-label">Одна партия → в РФ</span>
           </div>
         </div>
 
