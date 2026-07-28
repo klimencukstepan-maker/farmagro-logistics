@@ -179,6 +179,7 @@ h1, h2, h3, h4 {
   color: var(--text);
   position: relative;
   padding: 4px 0;
+  text-align: center;
   transition: var(--transition);
 }
 
@@ -199,65 +200,6 @@ h1, h2, h3, h4 {
 
 .nav__link:hover::after {
   width: 100%;
-}
-
-/* Dropdown */
-.nav__item--dropdown {
-  position: relative;
-}
-
-.nav__link--dropdown-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
-}
-
-.nav__dropdown-arrow {
-  transition: transform 0.3s ease;
-}
-
-.nav__item--dropdown:hover .nav__dropdown-arrow,
-.nav__item--dropdown.open .nav__dropdown-arrow {
-  transform: rotate(180deg);
-}
-
-.nav__dropdown {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%) translateY(8px);
-  min-width: 220px;
-  background: var(--primary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 6px 0;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
-  z-index: 100;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
-}
-
-.nav__item--dropdown:hover .nav__dropdown {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(4px);
-}
-
-.nav__dropdown-link {
-  display: block;
-  padding: 10px 20px;
-  font-size: 0.88rem;
-  font-weight: 500;
-  color: var(--text);
-  white-space: nowrap;
-  transition: var(--transition);
-}
-
-.nav__dropdown-link:hover {
-  color: var(--gold);
-  background: var(--bg-card);
 }
 
 /* Hamburger */
@@ -341,6 +283,18 @@ h1, h2, h3, h4 {
   color: var(--text-light);
   margin-bottom: 36px;
   line-height: 1.6;
+}
+
+.hero__title-sub {
+  display: block;
+  font-size: 0.45em;
+  font-weight: 500;
+  color: var(--gold-light);
+  font-family: var(--font);
+  margin-top: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0.85;
 }
 
 /* Stats */
@@ -1566,6 +1520,7 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  padding-right: 140px;
 }
 
 .transit-kz__stop-name {
@@ -1719,7 +1674,7 @@ textarea {
 
 .consolidation-wh__diagram {
   position: relative;
-  min-height: 360px;
+  aspect-ratio: 2 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1946,6 +1901,7 @@ textarea {
   }
 
   .consolidation-wh__diagram {
+    aspect-ratio: auto;
     min-height: 300px;
     padding: 32px 16px;
   }
