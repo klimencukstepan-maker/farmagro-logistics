@@ -629,21 +629,13 @@ ym(110998990, 'init', {
             <span class="consolidation-wh__flow-label">Поставщик 3</span>
           </div>
 
-          <!-- Стрелки схода (SVG-линии) -->
-          <svg class="consolidation-wh__arrows" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <!-- Левая стрелка: Поставщик 1 → Склад-хаб -->
-            <path d="M64 24 C64 70 130 80 195 95" fill="none" stroke="rgba(201,168,78,0.25)" stroke-width="2" stroke-dasharray="4 4"/>
-            <polyline points="187,88 195,95 190,102" fill="none" stroke="rgba(201,168,78,0.35)" stroke-width="2"/>
-            <!-- Центральная стрелка: Поставщик 2 → Склад-хаб -->
-            <line x1="200" y1="20" x2="200" y2="90" stroke="rgba(201,168,78,0.3)" stroke-width="2" stroke-dasharray="4 4"/>
-            <polyline points="193,82 200,90 207,82" fill="none" stroke="rgba(201,168,78,0.4)" stroke-width="2"/>
-            <!-- Правая стрелка: Поставщик 3 → Склад-хаб -->
-            <path d="M336 24 C336 70 270 80 205 95" fill="none" stroke="rgba(201,168,78,0.25)" stroke-width="2" stroke-dasharray="4 4"/>
-            <polyline points="210,88 205,95 213,102" fill="none" stroke="rgba(201,168,78,0.35)" stroke-width="2"/>
-            <!-- Исходящая стрелка: Склад-хаб → РФ -->
-            <line x1="200" y1="115" x2="200" y2="185" stroke="rgba(201,168,78,0.5)" stroke-width="2.5" stroke-dasharray="6 3"/>
-            <polyline points="193,177 200,185 207,177" fill="none" stroke="#C9A96E" stroke-width="2.5"/>
-          </svg>
+          <!-- Стрелки схода (CSS-линии) -->
+          <div class="consolidation-wh__arrow-connector" aria-hidden="true">
+            <div class="cw-arrow cw-arrow--left"></div>
+            <div class="cw-arrow cw-arrow--center"></div>
+            <div class="cw-arrow cw-arrow--right"></div>
+            <div class="cw-arrow cw-arrow--down"></div>
+          </div>
 
           <!-- Центральный хаб -->
           <div class="consolidation-wh__hub">
