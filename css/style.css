@@ -1934,54 +1934,175 @@ textarea {
   .section__tagline::after { width: 20px; margin: 0 8px; }
 }
 
-/* --- CSS-стрелки для схемы склада-хаба (вместо SVG) --- */
-.consolidation-wh__arrow-connector {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
+
+/* --- Новая схема склада-хаба (flexbox) --- */
+.cw-flex {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  padding: 10px 0;
 }
 
-.cw-arrow {
-  position: absolute;
-  pointer-events: none;
+.cw-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
 }
 
-/* Левая стрелка: от поставщика 1 (слева сверху) к хабу (центр) */
-.cw-arrow--left {
-  top: 50px;
-  left: 5%;
-  width: 45%;
-  height: 60px;
-  border-top: 2px dashed rgba(201, 168, 78, 0.3);
-  border-right: 2px dashed rgba(201, 168, 78, 0.3);
-  border-radius: 0 30px 0 0;
+.cw-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: rgba(201, 168, 78, 0.04);
+  border: 1px solid rgba(201, 168, 78, 0.15);
+  border-radius: 10px;
+  width: 100px;
 }
 
-.cw-arrow--left::after {
-  content: '';
+.cw-node-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(201, 168, 78, 0.1);
+  border: 1px solid rgba(201, 168, 78, 0.2);
+}
+
+.cw-node-icon--out {
+  background: rgba(201, 168, 78, 0.15);
+  border-color: rgba(201, 168, 78, 0.4);
+}
+
+.cw-node-label {
+  font-size: 0.7rem;
+  color: var(--text-light);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.cw-top-gap {
+  position: relative;
+  width: 40px;
+  height: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cw-top-line {
+  width: 100%;
+  height: 2px;
+  background: rgba(201, 168, 78, 0.25);
+}
+
+.cw-top-arrow-down {
   position: absolute;
-  bottom: -6px;
-  right: -8px;
+  right: 0;
   width: 0;
   height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 10px solid rgba(201, 168, 78, 0.4);
-  transform: rotate(135deg);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid rgba(201, 168, 78, 0.35);
+  transform: rotate(90deg);
 }
 
-/* Центральная стрелка: от поставщика 2 вниз к хабу */
-.cw-arrow--center {
-  top: 50px;
-  left: 50%;
-  transform: translateX(-50%);
+.cw-merge-row {
+  display: flex;
+  align-items: stretch;
+  width: 80%;
+  height: 20px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.cw-merge-left {
+  flex: 1;
+  border-right: 2px solid rgba(201, 168, 78, 0.2);
+  height: 50%;
+}
+
+.cw-merge-line {
   width: 2px;
-  height: 50px;
-  background: linear-gradient(to bottom, rgba(201, 168, 78, 0.3), rgba(201, 168, 78, 0.5));
+  background: rgba(201, 168, 78, 0.3);
+  height: 100%;
+  position: relative;
 }
 
-.cw-arrow--center::after {
+.cw-merge-right {
+  flex: 1;
+  border-left: 2px solid rgba(201, 168, 78, 0.2);
+  height: 50%;
+  align-self: flex-end;
+}
+
+.cw-merge-arrow {
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 9px solid rgba(201, 168, 78, 0.4);
+  margin: 0 auto;
+}
+
+.cw-hub {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  padding: 18px 28px;
+  background: rgba(201, 168, 78, 0.06);
+  border: 1px solid rgba(201, 168, 78, 0.2);
+  border-radius: var(--radius);
+  margin: 8px 0;
+  z-index: 3;
+}
+
+.cw-hub-glow {
+  position: absolute;
+  inset: -12px;
+  background: radial-gradient(ellipse at center, rgba(201, 168, 78, 0.08), transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.cw-hub-icon {
+  margin-bottom: 2px;
+}
+
+.cw-hub-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  font-family: var(--font-display);
+}
+
+.cw-hub-subtitle {
+  font-size: 0.72rem;
+  color: var(--gold);
+  opacity: 0.8;
+}
+
+.cw-down-arrow {
+  width: 2px;
+  height: 22px;
+  background: linear-gradient(to bottom, rgba(201, 168, 78, 0.4), rgba(201, 168, 78, 0.6));
+  position: relative;
+  margin: 0 auto;
+}
+
+.cw-down-arrow::after {
   content: '';
   position: absolute;
   bottom: -6px;
@@ -1991,52 +2112,23 @@ textarea {
   height: 0;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-top: 8px solid rgba(201, 168, 78, 0.5);
+  border-top: 8px solid rgba(201, 168, 78, 0.6);
 }
 
-/* Правая стрелка: от поставщика 3 к хабу */
-.cw-arrow--right {
-  top: 50px;
-  right: 5%;
-  width: 45%;
-  height: 60px;
-  border-top: 2px dashed rgba(201, 168, 78, 0.3);
-  border-left: 2px dashed rgba(201, 168, 78, 0.3);
-  border-radius: 30px 0 0 0;
+.cw-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: rgba(201, 168, 78, 0.04);
+  border: 1px solid rgba(201, 168, 78, 0.2);
+  border-radius: 10px;
+  margin-top: 4px;
 }
 
-.cw-arrow--right::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: -8px;
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 10px solid rgba(201, 168, 78, 0.4);
-  transform: rotate(-135deg);
-}
-
-/* Нижняя стрелка: от хаба вниз к РФ */
-.cw-arrow--down {
-  bottom: 60px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 2px;
-  height: 40px;
-  background: linear-gradient(to bottom, rgba(201, 168, 78, 0.5), rgba(201, 168, 78, 0.7));
-}
-
-.cw-arrow--down::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 8px solid #C9A96E;
+@media (max-width: 500px) {
+  .cw-node { width: 80px; padding: 6px 8px; }
+  .cw-top-gap { width: 20px; }
+  .cw-hub { padding: 14px 18px; }
 }
