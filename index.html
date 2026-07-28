@@ -272,6 +272,16 @@ ym(110998990, 'init', {
           <li><a href="#transit-kz" class="nav__link">Транзит через Казахстан</a></li>
           <li><a href="#consolidation-wh" class="nav__link">Склад в Казахстане</a></li>
           <li><a href="vagonmarket.html" class="nav__link">Попутные вагоны</a></li>
+          <li class="nav__item--dropdown">
+            <a href="#" class="nav__link nav__link--dropdown-toggle" onclick="return false;">Города доставки <svg class="nav__dropdown-arrow" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+            <ul class="nav__dropdown">
+              <li><a href="/dostavka-iz-kitaya-v-moskvu.html" class="nav__dropdown-link">Москва</a></li>
+              <li><a href="/dostavka-iz-kitaya-v-sankt-peterburg.html" class="nav__dropdown-link">Санкт-Петербург</a></li>
+              <li><a href="/dostavka-iz-kitaya-v-novosibirsk.html" class="nav__dropdown-link">Новосибирск</a></li>
+              <li><a href="/dostavka-iz-kitaya-v-krasnoyarsk.html" class="nav__dropdown-link">Красноярск</a></li>
+              <li><a href="/dostavka-iz-kitaya-v-ekaterinburg.html" class="nav__dropdown-link">Екатеринбург</a></li>
+            </ul>
+          </li>
           <li><a href="#advantages" class="nav__link">Преимущества</a></li>
           <li><a href="#calculator" class="nav__link">Калькулятор</a></li>
           <li><a href="#contacts" class="nav__link">Контакты</a></li>
@@ -372,7 +382,7 @@ ym(110998990, 'init', {
           <h3 class="service-card__title">Ж/Д перевозка по РФ</h3>
           <p class="service-card__text">
             После пересечения границы груз перегружается в крытые вагоны и отправляется 
-            в любой город Российской Федерации. Работаем только с грузовыми закрытыми (крытыми) вагонами для максимальной сохранности груза.
+            в любой город Российской Федерации, включая <a href="/dostavka-iz-kitaya-v-moskvu.html" class="geo-summary__card--inline">Москву</a>, <a href="/dostavka-iz-kitaya-v-sankt-peterburg.html" class="geo-summary__card--inline">Санкт-Петербург</a>, <a href="/dostavka-iz-kitaya-v-novosibirsk.html" class="geo-summary__card--inline">Новосибирск</a>. Работаем только с грузовыми закрытыми (крытыми) вагонами для максимальной сохранности груза.
             <strong>Также осуществляем Ж/Д перевозки внутри России на любую железнодорожную станцию</strong> — удобно, если груз уже находится на территории РФ.
           </p>
           <ul class="service-card__list">
@@ -537,7 +547,10 @@ ym(110998990, 'init', {
               где перегружается на железнодорожные вагоны. Такой маршрут даёт 
               <strong>отсрочку по уплате НДС на 30 дней</strong> — вы не замораживаете 
               оборотку на таможне. Полное ВЭД-сопровождение берём на себя, 
-              срок доставки — <strong>18–25 дней</strong>.
+              срок доставки — <strong>18–25 дней</strong>. Активно работаем по направлениям 
+              в <a href="/dostavka-iz-kitaya-v-ekaterinburg.html" class="geo-summary__card--inline">Екатеринбург</a> 
+              и <a href="/dostavka-iz-kitaya-v-krasnoyarsk.html" class="geo-summary__card--inline">Красноярск</a> — 
+              отправляем сборные грузы и оборудование на регулярной основе.
             </p>
           </div>
 
@@ -627,19 +640,19 @@ ym(110998990, 'init', {
           </div>
 
           <!-- Стрелки схода (SVG-линии) -->
-          <svg class="consolidation-wh__arrows" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <!-- Левая стрелка схода -->
-            <path d="M80 10 L80 80 Q80 100 120 110 L200 130" fill="none" stroke="rgba(201,168,78,0.25)" stroke-width="2" stroke-dasharray="4 4"/>
-            <polyline points="190,122 200,130 193,138" fill="none" stroke="rgba(201,168,78,0.35)" stroke-width="2"/>
-            <!-- Центральная стрелка -->
-            <line x1="200" y1="10" x2="200" y2="120" stroke="rgba(201,168,78,0.3)" stroke-width="2" stroke-dasharray="4 4"/>
-            <polyline points="193,112 200,120 207,112" fill="none" stroke="rgba(201,168,78,0.4)" stroke-width="2"/>
-            <!-- Правая стрелка схода -->
-            <path d="M320 10 L320 80 Q320 100 280 110 L200 130" fill="none" stroke="rgba(201,168,78,0.25)" stroke-width="2" stroke-dasharray="4 4"/>
-            <polyline points="210,122 200,130 207,138" fill="none" stroke="rgba(201,168,78,0.35)" stroke-width="2"/>
-            <!-- Исходящая стрелка -->
-            <line x1="200" y1="160" x2="200" y2="190" stroke="rgba(201,168,78,0.5)" stroke-width="2.5" stroke-dasharray="6 3"/>
-            <polyline points="193,182 200,190 207,182" fill="none" stroke="#C9A96E" stroke-width="2.5"/>
+          <svg class="consolidation-wh__arrows" viewBox="0 0 400 200" preserveAspectRatio="none" aria-hidden="true">
+            <!-- Левая стрелка: Поставщик 1 → Склад-хаб -->
+            <path d="M64 24 C64 70 130 80 195 95" fill="none" stroke="rgba(201,168,78,0.25)" stroke-width="2" stroke-dasharray="4 4"/>
+            <polyline points="187,88 195,95 190,102" fill="none" stroke="rgba(201,168,78,0.35)" stroke-width="2"/>
+            <!-- Центральная стрелка: Поставщик 2 → Склад-хаб -->
+            <line x1="200" y1="20" x2="200" y2="90" stroke="rgba(201,168,78,0.3)" stroke-width="2" stroke-dasharray="4 4"/>
+            <polyline points="193,82 200,90 207,82" fill="none" stroke="rgba(201,168,78,0.4)" stroke-width="2"/>
+            <!-- Правая стрелка: Поставщик 3 → Склад-хаб -->
+            <path d="M336 24 C336 70 270 80 205 95" fill="none" stroke="rgba(201,168,78,0.25)" stroke-width="2" stroke-dasharray="4 4"/>
+            <polyline points="210,88 205,95 213,102" fill="none" stroke="rgba(201,168,78,0.35)" stroke-width="2"/>
+            <!-- Исходящая стрелка: Склад-хаб → РФ -->
+            <line x1="200" y1="115" x2="200" y2="185" stroke="rgba(201,168,78,0.5)" stroke-width="2.5" stroke-dasharray="6 3"/>
+            <polyline points="193,177 200,185 207,177" fill="none" stroke="#C9A96E" stroke-width="2.5"/>
           </svg>
 
           <!-- Центральный хаб -->
