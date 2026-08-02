@@ -1,0 +1,23 @@
+{
+  "task": "scheme-warehouse-redesign",
+  "createdAt": "2026-07-28T14:42:00+03:00",
+  "steps": {
+    "copywriter": {
+      "status": "done",
+      "artifact": "kz-consolidation-texts.json",
+      "note": "Тексты готовы с предыдущего запуска"
+    },
+    "designer": {
+      "status": "running",
+      "artifact": "scheme_design.md",
+      "startedAt": "2026-07-28T14:42:00+03:00",
+      "agent": "emil-scheme-design"
+    },
+    "developer": {
+      "status": "pending"
+    },
+    "tester": {
+      "status": "pending"
+    }
+  }
+}
