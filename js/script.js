@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.location.search.includes('sent=ok')) {
     setTimeout(() => showToast('✅ Заявка отправлена! Мы свяжемся с вами в ближайшее время.'), 500);
   }
+  if (window.location.search.includes('sent=error')) {
+    setTimeout(() => showToast('❌ Не удалось отправить заявку. Позвоните нам или попробуйте ещё раз.'), 500);
+  }
 
   // ========== SCROLL ANIMATIONS (Intersection Observer) ==========
   const revealElements = document.querySelectorAll('.reveal');

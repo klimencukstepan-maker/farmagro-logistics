@@ -18,10 +18,16 @@ $phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
 $email = isset($_POST['email']) ? trim($_POST['email']) : '';
 $message = isset($_POST['message']) ? trim($_POST['message']) : '';
 
-// Антиспам — время заполнения (если меньше 3 секунд — бот)
+// Антиспам — скрытое поле honeypot
 $honeypot = isset($_POST['website']) ? trim($_POST['website']) : '';
 if (!empty($honeypot)) {
     exit; // Бот — тихо выходим
+}
+
+// Минимальная валидация: имя и телефон обязательны
+if ($name === '' || $phone === '') {
+    header('Location: /?sent=error#contact');
+    exit;
 }
 
 // Тема письма
@@ -62,9 +68,15 @@ $headers = "From: ТД Кайрос Импорт <tdkairos.import@yandex.ru>\r\n
 $headers .= "Reply-To: $email\r\n";
 $headers .= "X-Mailer: PHP/" . phpversion();
 
-// Отправка
-mail($to, $subject, $body, $headers);
+// Отправка через MTA (msmtp). Проверяем результат, чтобы не показывать
+// ложный «успех», если письмо не ушло (например, SMTP недоступен).
+$sent = @mail($to, $subject, $body, $headers);
 
-// Перенаправление на страницу с сообщением
-header('Location: /?sent=ok#contact');
+if ($sent) {
+    error_log('[send.php] OK: ' . $subject . ' от ' . $phone);
+    header('Location: /?sent=ok#contact');
+} else {
+    error_log('[send.php] FAIL: ' . $subject . ' от ' . $phone . ' — mail() вернул false');
+    header('Location: /?sent=error#contact');
+}
 exit;
