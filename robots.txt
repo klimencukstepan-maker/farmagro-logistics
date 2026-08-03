@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://проф-логист.рф/sitemap.xml
+
+Sitemap: https://xn----ftbpkncdipkp.xn--p1ai/sitemap.xml
