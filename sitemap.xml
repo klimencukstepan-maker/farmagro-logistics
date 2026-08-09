@@ -84,4 +84,22 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://xn----ftbpkncdipkp.xn--p1ai/kargo-iz-kitaya.html</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://xn----ftbpkncdipkp.xn--p1ai/rastamozhka-gruza-iz-kitaya.html</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://xn----ftbpkncdipkp.xn--p1ai/zhd-perevozki-iz-kitaya.html</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
