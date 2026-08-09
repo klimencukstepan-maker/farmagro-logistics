@@ -1,4 +1,18 @@
 User-agent: *
 Allow: /
 
+# Служебные файлы — закрыты от индексации
+Disallow: /office/
+Disallow: /*.md$
+Disallow: /*.json$
+Disallow: /kz-consolidation-design.html
+Disallow: /index_new_scheme.html
+Disallow: /test-audit*
+Disallow: /seo-*
+Disallow: /posts-ready-*
+Disallow: /smm-*
+Disallow: /scheme_design.html
+Disallow: /chain-state.json
+Disallow: /package.json
+
 Sitemap: https://xn----ftbpkncdipkp.xn--p1ai/sitemap.xml
